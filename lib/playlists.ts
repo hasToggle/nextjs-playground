@@ -1,7 +1,7 @@
 export type Playlist = (typeof playlists)[number];
 
 export const playlists = [
-  "Recently Added",
+  "Server Actions",
   "Recently Played",
   "Top Songs",
   "Top Albums",

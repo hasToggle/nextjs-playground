@@ -1,5 +1,3 @@
-import { Metadata } from "next";
-
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
@@ -10,11 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AlbumArtwork } from "@/components/album-artwork";
 import { PodcastEmptyPlaceholder } from "@/components/podcast-empty-placeholder";
 import { listenNowAlbums, madeForYouAlbums } from "@/lib/albums";
-
-export const metadata: Metadata = {
-  title: "Music App",
-  description: "Example music app using the components.",
-};
 
 export default function MusicPage() {
   return (

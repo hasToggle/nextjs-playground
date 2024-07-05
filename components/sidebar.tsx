@@ -14,7 +14,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-            Discover
+            The Component
           </h2>
           <div className="space-y-1">
             <Button variant="secondary" className="w-full justify-start">
@@ -31,7 +31,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <circle cx="12" cy="12" r="10" />
                 <polygon points="10 8 16 12 10 16 10 8" />
               </svg>
-              Listen Now
+              Lifecycle
             </Button>
             <Button variant="ghost" className="w-full justify-start">
               <svg
@@ -49,7 +49,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <rect width="7" height="7" x="14" y="14" rx="1" />
                 <rect width="7" height="7" x="3" y="14" rx="1" />
               </svg>
-              Browse
+              State
             </Button>
             <Button variant="ghost" className="w-full justify-start">
               <svg
@@ -68,13 +68,13 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
                 <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19" />
               </svg>
-              Radio
+              Props
             </Button>
           </div>
         </div>
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-            Library
+            Data Fetching
           </h2>
           <div className="space-y-1">
             <Button variant="ghost" className="w-full justify-start">
@@ -94,7 +94,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <path d="M16 6H3" />
                 <path d="M12 18H3" />
               </svg>
-              Playlists
+              CSR
             </Button>
             <Button variant="ghost" className="w-full justify-start">
               <svg
@@ -110,7 +110,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <circle cx="8" cy="18" r="4" />
                 <path d="M12 18V2l7 4" />
               </svg>
-              Songs
+              SSG - Static
             </Button>
             <Button variant="ghost" className="w-full justify-start">
               <svg
@@ -126,7 +126,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
-              Made for You
+              SSR - Made for You
             </Button>
             <Button variant="ghost" className="w-full justify-start">
               <svg
@@ -142,7 +142,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12" />
                 <circle cx="17" cy="7" r="5" />
               </svg>
-              Artists
+              Streaming
             </Button>
             <Button variant="ghost" className="w-full justify-start">
               <svg
@@ -160,13 +160,13 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <path d="M8 8v12" />
                 <path d="M4 4v16" />
               </svg>
-              Albums
+              Other
             </Button>
           </div>
         </div>
         <div className="py-2">
           <h2 className="relative px-7 text-lg font-semibold tracking-tight">
-            Playlists
+            Forms
           </h2>
           <ScrollArea className="h-[300px] px-1">
             <div className="space-y-1 p-2">
