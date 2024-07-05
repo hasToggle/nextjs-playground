@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 
 import { Sidebar } from "@/components/sidebar";
 import { Menu } from "@/components/menu";
+import { Footer } from "@/components/footer";
 
 import { playlists } from "@/lib/playlists";
 import "./globals.css";
@@ -50,6 +51,7 @@ export default function RootLayout({
             </div>
           </div>
         </div>
+        <Footer />
       </body>
     </html>
   );
