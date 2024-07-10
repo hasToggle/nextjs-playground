@@ -15,6 +15,7 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import { Progress } from "@/components/ui/progress";
 
 import { Album } from "@/lib/albums";
 import { playlists } from "@/lib/playlists";
@@ -41,6 +42,7 @@ export function AlbumArtwork({
 }: AlbumArtworkProps) {
   const [rendering, setRendering] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const alreadyRunOnce = useRef(false);
 
   useEffect(() => {
@@ -84,6 +86,24 @@ export function AlbumArtwork({
     }
   }, [rendering, loading, onMount]);
 
+  useEffect(() => {
+    if (progress && progress < 100) {
+      onMount?.("updating");
+      const timeout = setTimeout(() => {
+        setProgress((prev) => {
+          const nextStep = prev + 5 + Math.floor(Math.random() * 18);
+          return Math.min(nextStep, 100);
+        });
+      }, 1500);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    } else {
+      onMount?.("idle");
+    }
+  }, [progress, onMount]);
+
   if (rendering) {
     return (
       <div className={cn("space-y-3", className)} {...props}>
@@ -101,6 +121,7 @@ export function AlbumArtwork({
                 )}
               />
             </div>
+            <Progress value={progress} className="mt-2 blur-sm" />
           </ContextMenuTrigger>
           <ContextMenuContent className="w-40">
             <ContextMenuItem>Add to Library</ContextMenuItem>
@@ -150,14 +171,25 @@ export function AlbumArtwork({
     );
   }
 
+  const handleStartTrack = () => {
+    if (progress) return;
+    setProgress((prev) => {
+      return prev + 10;
+    });
+  };
+
   return (
     <div className={cn("space-y-3", className)} {...props}>
       <ContextMenu>
         <ContextMenuTrigger>
           <div
-            className={`relative rounded-md transition-all hover:scale-105 ring-4 ${
-              !loading && alreadyRunOnce.current && "ring-green-700"
+            className={`relative rounded-md transition-all hover:scale-[1.01] ring-4 ${
+              !loading &&
+              alreadyRunOnce.current &&
+              "ring-green-700 cursor-pointer"
             }`}
+            aria-disabled={loading || !alreadyRunOnce.current}
+            onClick={handleStartTrack}
           >
             <Image
               src={album.cover}
@@ -188,6 +220,7 @@ export function AlbumArtwork({
               />
             )}
           </div>
+          <Progress value={progress} className="mt-2" />
         </ContextMenuTrigger>
         <ContextMenuContent className="w-40">
           <ContextMenuItem>Add to Library</ContextMenuItem>
