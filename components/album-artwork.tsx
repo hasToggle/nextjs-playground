@@ -184,9 +184,12 @@ export function AlbumArtwork({
         <ContextMenuTrigger>
           <div
             className={`relative rounded-md transition-all hover:scale-[1.01] ring-4 ${
+              !loading && alreadyRunOnce.current && "ring-sky-600"
+            } ${
               !loading &&
               alreadyRunOnce.current &&
-              "ring-green-700 cursor-pointer"
+              !progress &&
+              "cursor-pointer"
             }`}
             aria-disabled={loading || !alreadyRunOnce.current}
             onClick={handleStartTrack}
@@ -210,7 +213,7 @@ export function AlbumArtwork({
                 width={120}
               />
             )}
-            {!loading && alreadyRunOnce.current && (
+            {!loading && alreadyRunOnce.current && !progress && (
               <Image
                 src={Play}
                 alt=""
