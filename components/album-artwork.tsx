@@ -50,6 +50,7 @@ export function AlbumArtwork({
 
     const id = setTimeout(() => {
       setRendering(false);
+      onMount?.("idle");
     }, 2000);
 
     return () => {
