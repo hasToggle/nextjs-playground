@@ -70,10 +70,10 @@ export default function MusicPage() {
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <h2 className="text-2xl font-semibold tracking-tight">
-                    Day in the life of a component
+                    A day in the life of a component
                   </h2>
                   <p className="text-sm text-muted-foreground">
-                    Displaying, loading, and removing a single track.
+                    Lifecycle events on the example of a music track.
                   </p>
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function MusicPage() {
                 <span className="absolute -top-5 left-1 rounded-md px-4 font-medium">
                   {/* <SwitchWithLabel label="Show" /> */}
                   <Button
-                    className="border-2 border-transparent hover:border-orange-950"
+                    className="border-2 border-orange-100 hover:border-orange-950"
                     onClick={() => {
                       if (show) {
                         setShow(false);
@@ -98,7 +98,7 @@ export default function MusicPage() {
                     ) : (
                       <EyeOpenIcon className="mr-2 h-4 w-4" />
                     )}{" "}
-                    {show ? "Hide" : "Show"} track
+                    {show ? "Hide" : "Show"} component
                   </Button>
                 </span>
                 <div className="flex max-w-[420px] flex-col items-center justify-center">
@@ -167,7 +167,7 @@ export default function MusicPage() {
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
                   <h2 className="text-2xl font-semibold tracking-tight">
-                    Day in the life of every component
+                    A day in the life of every component
                   </h2>
                   <p className="text-sm text-muted-foreground">
                     Every single component has its own lifecycle.
@@ -175,20 +175,7 @@ export default function MusicPage() {
                 </div>
               </div>
               <Separator className="my-4" />
-              <div className="relative flex h-[450px] space-x-20 rounded-md border border-dashed border-gray-500">
-                <div className="mt-5 ml-5 flex space-x-4 pb-4">
-                  {listenNowAlbums.map((album) => (
-                    <AlbumArtwork
-                      key={album.name}
-                      album={album}
-                      className="w-[250px]"
-                      aspectRatio="portrait"
-                      width={250}
-                      height={330}
-                    />
-                  ))}
-                </div>
-              </div>
+              <AlbumArtworks />
             </TabsContent>
           </Tabs>
 
@@ -208,6 +195,46 @@ export default function MusicPage() {
         </div>
       </div>
     </>
+  );
+}
+
+function AlbumArtworks() {
+  return (
+    <div className="relative flex h-[450px] space-x-20 rounded-md border border-dashed border-gray-500">
+      <div className="mt-10 ml-5 flex space-x-4 pb-4">
+        {listenNowAlbums.map((album) => (
+          <Artwork key={album.name} album={album} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Artwork({ album }: { album: any }) {
+  const [lifecycleState, setLifecycleState] = useState<string>("idle");
+
+  const handleState = useCallback(
+    (status: any) => setLifecycleState(status),
+    []
+  );
+
+  return (
+    <div
+      key={album.name}
+      className={`relative rounded-md border border-dashed`}
+    >
+      <span className="absolute -top-7 left-0 rounded-md px-4 font-medium">
+        {lifecycleState}
+      </span>
+      <AlbumArtwork
+        album={album}
+        className="w-[250px]"
+        aspectRatio="portrait"
+        width={250}
+        height={330}
+        onMount={handleState}
+      />
+    </div>
   );
 }
 

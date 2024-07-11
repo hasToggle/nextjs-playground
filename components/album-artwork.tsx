@@ -59,11 +59,6 @@ export function AlbumArtwork({
     };
   }, [onMount]);
 
-  /* 
-    current: useEffect runs once - to connect to stream
-    add: useEffect runs multiple times - to get chunks of data
-  */
-
   useEffect(() => {
     if (!rendering) {
       if (!loading && !alreadyRunOnce.current) {
