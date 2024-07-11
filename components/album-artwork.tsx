@@ -99,10 +99,10 @@ export function AlbumArtwork({
       return () => {
         clearTimeout(timeout);
       };
-    } else {
+    } else if (!loading && alreadyRunOnce.current) {
       onMount?.("idle");
     }
-  }, [progress, onMount]);
+  }, [progress, onMount, loading]);
 
   if (rendering) {
     return (
