@@ -9,6 +9,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Hover } from "@/components/hover-card";
+import { Badge } from "@/components/ui/badge";
 
 import { AlbumArtwork } from "@/components/album-artwork";
 import { PodcastEmptyPlaceholder } from "@/components/podcast-empty-placeholder";
@@ -200,17 +201,17 @@ export default function MusicPage() {
 
 function AlbumArtworks() {
   return (
-    <div className="relative flex h-[450px] space-x-20 rounded-md border border-dashed border-gray-500">
-      <div className="mt-10 ml-5 flex space-x-4 pb-4">
+    <div className="relative flex h-[500px] space-x-20 rounded-md border border-dashed border-gray-500">
+      <div className="mt-14 ml-5 flex space-x-4 pb-4">
         {listenNowAlbums.map((album) => (
-          <Artwork key={album.name} album={album} />
+          <ArtworkItem key={album.name} album={album} />
         ))}
       </div>
     </div>
   );
 }
 
-function Artwork({ album }: { album: any }) {
+function ArtworkItem({ album }: { album: any }) {
   const [lifecycleState, setLifecycleState] = useState<string>("idle");
 
   const handleState = useCallback(
@@ -219,13 +220,13 @@ function Artwork({ album }: { album: any }) {
   );
 
   return (
-    <div
-      key={album.name}
-      className={`relative rounded-md border border-dashed`}
-    >
-      <span className="absolute -top-7 left-0 rounded-md px-4 font-medium">
+    <div key={album.name} className="relative">
+      <Badge
+        variant="outline"
+        className="absolute -top-9 left-0 rounded-md px-4 font-medium text-sm"
+      >
         {lifecycleState}
-      </span>
+      </Badge>
       <AlbumArtwork
         album={album}
         className="w-[250px]"
@@ -282,7 +283,7 @@ function LifecycleState({ state = "idle" }) {
           state === "unmounting" ? "font-semibold bg-orange-300" : ""
         }`}
       >
-        <Hover trigger="Unmounting" content="Cleaning up" />
+        <Hover trigger="Unmounting" content="Cleaning up🧹." />
       </li>
     </ul>
   );
