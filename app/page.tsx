@@ -15,24 +15,6 @@ import { AlbumArtwork } from "@/components/album-artwork";
 import { PodcastEmptyPlaceholder } from "@/components/podcast-empty-placeholder";
 import { listenNowAlbums, madeForYouAlbums } from "@/lib/albums";
 
-/* 
-  1. follow-on from previous session: ask how we can load data when react has rendered the component
-    - we can't do it using our current knowledge
-    - we need something that React provides - lifecycle methods
-    - lifecycle methods are methods that are called at different stages of a component's lifecycle
-  2. when does React call these methods? => breakout session for 15mins
-    - after rendering & when a component is created and inserted into the DOM
-    - after rendering & when a component is updated
-    - after rendering & when a component is removed from the DOM
-    => play through the lifecycle methods with console.logs
-  3. show demo of lifecycle methods
-  4. exercise: use setInterval to update the progress of a track
-    - use numbers to represent the progress
-    - update the progress every 1 second
-    - (clear the interval when the component is removed)
-    - add the progress state as a dependency to the useEffect
-*/
-
 const LIFECYCLE_EVENTS: { [key: string]: string } = {
   idle: "Waiting for user interaction.",
   rendering: "Showing the image, title, and description.",

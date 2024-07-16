@@ -51,6 +51,7 @@ export function AlbumArtwork({
     const id = setTimeout(() => {
       setRendering(false);
       onMount?.("idle");
+      clearTimeout(id);
     }, 2000);
 
     return () => {
@@ -74,6 +75,7 @@ export function AlbumArtwork({
         const id = setTimeout(() => {
           setLoading(false);
           onMount?.("idle");
+          clearTimeout(id);
         }, 2500 + Math.random() * 2000);
         return () => {
           clearTimeout(id);
