@@ -1,3 +1,12 @@
+type Product = {
+  id: number;
+  name: string;
+  href: string;
+  price: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
 const products = [
   createPromise({
     id: 1,
@@ -40,6 +49,7 @@ const products = [
       "Hand holding black machined steel mechanical pencil with brass tip and top.",
   }),
 ];
+
 function createPromise(data: any) {
   return new Promise<any>((resolve) => {
     setTimeout(() => {
@@ -48,4 +58,4 @@ function createPromise(data: any) {
   });
 }
 
-export { products };
+export { products, type Product };

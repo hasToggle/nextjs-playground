@@ -1,9 +1,9 @@
-import { products } from "@/lib/data";
+import { products, type Product } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
 export default async function SSR() {
-  const resolvedProducts = await Promise.all<object[]>(products);
+  const resolvedProducts = await Promise.all<Product>(products);
   return (
     <>
       <h1>Server-Side Rendering</h1>
