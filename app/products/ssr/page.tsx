@@ -3,7 +3,6 @@ import { products } from "@/lib/data";
 export const dynamic = "force-dynamic";
 
 export default async function SSR() {
-  console.log("START FETCHING PRODUCTS");
   /* fake a delay of 3 seconds */
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return (
