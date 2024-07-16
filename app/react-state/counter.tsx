@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useReducer, type Reducer } from "react";
+import { useState, useCallback, useReducer, type Reducer } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { Boundary } from "@/components/ui/boundary";
@@ -68,9 +68,9 @@ export function Counter() {
     "codeDisplay" | "buttonDisplay"
   >("buttonDisplay");
 
-  const handleAnimationComplete = () => {
+  const handleAnimationComplete = useCallback(() => {
     setComponentToShow("buttonDisplay");
-  };
+  }, []);
 
   const flipVariants = {
     initial: {

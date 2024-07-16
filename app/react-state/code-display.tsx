@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { getHighlighter } from "shiki";
+"use client";
+
+import { useState, useEffect } from "react";
+import { createHighlighter } from "shiki";
 import { SkeletonCode } from "./skeleton-code";
 
 export const CodeDisplay = ({
@@ -17,7 +19,7 @@ export const CodeDisplay = ({
   useEffect(() => {
     async function runHighlighter() {
       setHighlighter(
-        await getHighlighter({
+        await createHighlighter({
           themes: ["ayu-dark"],
           langs: ["jsx"],
         })
