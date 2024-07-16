@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import ServerComponent from "./streaming";
 import ClientWrapper from "./client-wrapper";
 
+export const dynamic = "force-dynamic";
+
 export default function Products() {
   return (
     <div className="bg-white">
