@@ -69,9 +69,11 @@ export const CodeDisplay = ({
   }
 
   return (
-    <div
-      className="overflow-scroll whitespace-pre-wrap sm:overflow-hidden rounded-md m-2"
-      dangerouslySetInnerHTML={{ __html: highlightedCode }}
-    />
+    <div className="bg-gray-950 rounded-md p-5">
+      <div
+        className="overflow-scroll whitespace-pre-wrap sm:overflow-hidden"
+        dangerouslySetInnerHTML={{ __html: highlightedCode }}
+      />
+    </div>
   );
 };

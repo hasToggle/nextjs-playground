@@ -72,3 +72,7 @@
     padding: 2px 8px 2px 0;
     animation: highlightFadeIn 0.2s ease-in-out forwards;
   }
+  
+  code {
+    @apply text-sm !leading-relaxed md:text-base;
+  }
