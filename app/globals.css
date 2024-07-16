@@ -57,3 +57,18 @@
       @apply bg-background text-foreground;
     }
   }
+
+  @keyframes highlightFadeIn {
+    from {
+      background-color: transparent;
+    }
+    to {
+      background-color: #808080; /* Your highlight color */
+    }
+  }
+  
+  .highlighted-line {
+    border-radius: 12px;
+    padding: 2px 8px 2px 0;
+    animation: highlightFadeIn 0.2s ease-in-out forwards;
+  }

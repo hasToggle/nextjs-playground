@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -19,6 +19,13 @@ const config = {
     },
     extend: {
       colors: {
+        hastoggle: {
+          pink: "#FF0080",
+          blue: "#0070F3",
+          cyan: "#50E3C2",
+          orange: "#F5A623",
+          violet: "#7928CA",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -58,7 +65,58 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      keyframes: {
+      keyframes: ({ theme }) => ({
+        rerender: {
+          "0%": {
+            ["border-color"]: theme("colors.hastoggle.pink"),
+          },
+          "40%": {
+            ["border-color"]: theme("colors.hastoggle.pink"),
+          },
+        },
+        highlight: {
+          "0%": {
+            background: theme("colors.hastoggle.pink"),
+            color: theme("colors.white"),
+          },
+          "40%": {
+            background: theme("colors.hastoggle.pink"),
+            color: theme("colors.white"),
+          },
+        },
+        loading: {
+          "0%": {
+            opacity: ".2",
+          },
+          "20%": {
+            opacity: "1",
+            transform: "translateX(1px)",
+          },
+          to: {
+            opacity: ".2",
+          },
+        },
+        shimmer: {
+          "100%": {
+            transform: "translateX(100%)",
+          },
+        },
+        translateXReset: {
+          "100%": {
+            transform: "translateX(0)",
+          },
+        },
+        fadeToTransparent: {
+          "0%": {
+            opacity: "1",
+          },
+          "40%": {
+            opacity: "1",
+          },
+          "100%": {
+            opacity: "0",
+          },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -67,7 +125,7 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-      },
+      }),
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
@@ -75,6 +133,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
