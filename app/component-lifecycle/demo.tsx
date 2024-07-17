@@ -23,7 +23,7 @@ const LIFECYCLE_EVENTS: { [key: string]: string } = {
   unmounting: "Disconnecting from the stream.",
 };
 
-export default function LifecyclePage() {
+export default function LifecycleDemo() {
   const [show, setShow] = useState<boolean>(false);
   const [currentState, setCurrentState] = useState<string>("idle");
   const [events, setEvents] = useState<string[]>([]);

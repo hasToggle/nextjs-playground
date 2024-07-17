@@ -64,7 +64,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
               React State
             </Button>
             <Button
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/component-lifecycle")}
               variant="ghost"
               className="w-full justify-start"
             >
