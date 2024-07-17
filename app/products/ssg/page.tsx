@@ -1,6 +1,6 @@
 import { products } from "@/lib/data";
 
-export default async function Products() {
+export default async function SSG({ params }: { params: { id: string } }) {
   /* fake a delay of 3 seconds */
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return (

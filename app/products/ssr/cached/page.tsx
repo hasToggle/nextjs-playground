@@ -1,27 +1,39 @@
-import { products } from "@/lib/data";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import Table from "../table";
+import Products from "../products";
+import { Suspense } from "react";
 
 export default async function SSR() {
   /* fake a delay of 3 seconds */
-  /* await new Promise((resolve) => setTimeout(resolve, 3000)); */
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return (
-    <>
-      {products?.map((product) => (
-        <div key={product.id}>
-          <div className="my-4 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            <div>
-              <img
-                src={product.imageSrc}
-                alt={product.imageAlt}
-                className="h-full w-full object-cover object-center group-hover:opacity-75"
-              />
-            </div>
-            <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
-            <p className="mt-1 text-lg font-medium text-gray-900">
-              {product.price}
-            </p>
-          </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Products</CardTitle>
+        <CardDescription>
+          Manage your products and view their sales performance.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Suspense fallback={<div>Loading ...</div>}>
+          <Table>
+            <Products />
+          </Table>
+        </Suspense>
+      </CardContent>
+      <CardFooter>
+        <div className="text-xs text-muted-foreground">
+          Showing <strong>1-10</strong> of <strong>32</strong> products
         </div>
-      ))}
-    </>
+      </CardFooter>
+    </Card>
   );
 }

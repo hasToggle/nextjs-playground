@@ -44,8 +44,8 @@ export default function RootLayout({
           {/* <Menu /> */}
           <div className="border-t">
             <div className="bg-background">
-              <div className="grid lg:grid-cols-5">
-                <Sidebar playlists={playlists} className="hidden lg:block" />
+              <div className="grid sm:grid-cols-5">
+                <Sidebar playlists={playlists} className="hidden sm:block" />
                 {children}
               </div>
             </div>
