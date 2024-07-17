@@ -3,8 +3,6 @@ import ClientComponent from "./client-use-promise";
 import ClientWrapper from "./client-wrapper";
 import { products } from "@/lib/data";
 
-export const dynamic = "force-dynamic";
-
 export default function Products() {
   const productList = new Promise<Array<any>>((resolve) => {
     setTimeout(() => {
