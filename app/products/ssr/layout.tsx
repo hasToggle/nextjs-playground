@@ -4,6 +4,11 @@ import { useRouter, usePathname } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+/* add
+  - border indicating server/client component
+  - info about where & when fetching starts and where and when data is rendered
+*/
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -20,13 +25,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Cached products are fetched at build time and are static. Dynamic
               products are fetched on each request.
             </p>
+            <p className="text-muted-foreground">
+              Where and when do you initiate fetching data and where do you
+              display it?
+            </p>
           </div>
         </div>
 
-        <Tabs
-          defaultValue={pathname.split("/")[3]}
-          className="h-full space-y-6"
-        >
+        <Tabs value={pathname.split("/")[3]} className="h-full space-y-6">
           <div className="space-between flex items-center">
             <TabsList>
               <TabsTrigger

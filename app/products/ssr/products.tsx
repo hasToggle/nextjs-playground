@@ -40,7 +40,7 @@ export default async function Products() {
             <Badge variant="outline">Draft</Badge>
           </TableCell>
           <TableCell className="hidden md:table-cell">
-            ${product.price}
+            {product.price}
           </TableCell>
           <TableCell className="hidden md:table-cell">25</TableCell>
           <TableCell className="hidden md:table-cell">
