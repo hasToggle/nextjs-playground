@@ -14,9 +14,9 @@ export function ImageLink({
   alt: string;
 }) {
   const pathname = usePathname();
-  const segment = pathname.split("/")[3];
+  const segment = pathname.split("/")[2];
   return (
-    <Link href={`/products/ssr/${segment}/${id}`}>
+    <Link href={`/data-fetching/${segment}/${id}`}>
       <Image
         alt={alt}
         className="aspect-square rounded-md object-cover"

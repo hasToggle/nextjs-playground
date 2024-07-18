@@ -9,18 +9,30 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { Badge } from "@/components/ui/badge";
+
 import Table from "../table";
 import Products from "../products";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30;
 
-export default function SSR() {
+export default function ISR() {
   return (
-    <Card>
+    <Card className="relative border-sky-200">
+      <Badge
+        className="absolute left-3 -top-3 bg-white border-sky-200"
+        variant="outline"
+      >
+        Server Component (region US1)
+      </Badge>
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>
-          Manage your products and view their sales performance.
+          Fetch initiated at request time in your serverless functions
+          environment.
+          <br />
+          Fetch resolved at request time in your serverless functions
+          environment.
         </CardDescription>
       </CardHeader>
       <CardContent>

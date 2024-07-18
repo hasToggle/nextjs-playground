@@ -44,7 +44,7 @@ export default async function Products() {
           </TableCell>
           <TableCell className="hidden md:table-cell">25</TableCell>
           <TableCell className="hidden md:table-cell">
-            2023-07-12 10:42 AM
+            {new Date().toISOString()}
           </TableCell>
           <TableCell>
             <DropdownMenu>

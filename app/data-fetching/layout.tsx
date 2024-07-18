@@ -32,29 +32,53 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        <Tabs value={pathname.split("/")[3]} className="h-full space-y-6">
+        <Tabs value={pathname.split("/")[2]} className="h-full space-y-6">
           <div className="space-between flex items-center">
             <TabsList>
               <TabsTrigger
-                onClick={() => router.push("/products/ssr/cached")}
-                value="cached"
+                onClick={() => router.push("/data-fetching/ssg")}
+                value="ssg"
                 className="relative"
               >
-                Cached
+                SSG
               </TabsTrigger>
               <TabsTrigger
-                onClick={() => router.push("/products/ssr/dynamic")}
-                value="dynamic"
+                onClick={() => router.push("/data-fetching/ssr")}
+                value="ssr"
               >
-                Dynamic
+                SSR
+              </TabsTrigger>
+              <TabsTrigger
+                onClick={() => router.push("/data-fetching/isr")}
+                value="isr"
+              >
+                ISR
+              </TabsTrigger>
+              <TabsTrigger
+                onClick={() => router.push("/data-fetching/csr")}
+                value="csr"
+              >
+                CSR
               </TabsTrigger>
             </TabsList>
           </div>
-          <TabsContent value="cached" className="border-none p-0 outline-none">
+          <TabsContent value="ssg" className="border-none p-0 outline-none">
             {children}
           </TabsContent>
           <TabsContent
-            value="dynamic"
+            value="ssr"
+            className="h-full flex-col border-none p-0 data-[state=active]:flex"
+          >
+            {children}
+          </TabsContent>
+          <TabsContent
+            value="isr"
+            className="h-full flex-col border-none p-0 data-[state=active]:flex"
+          >
+            {children}
+          </TabsContent>
+          <TabsContent
+            value="csr"
             className="h-full flex-col border-none p-0 data-[state=active]:flex"
           >
             {children}

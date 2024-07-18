@@ -7,19 +7,29 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { Badge } from "@/components/ui/badge";
+
 import Table from "../table";
 import Products from "../products";
 import { Suspense } from "react";
 
-export default async function SSR() {
+export default async function SSG() {
   /* fake a delay of 3 seconds */
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return (
-    <Card>
+    <Card className="relative border-sky-200">
+      <Badge
+        className="absolute left-3 -top-3 bg-white border-sky-200"
+        variant="outline"
+      >
+        Server Component (region US1)
+      </Badge>
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>
-          Manage your products and view their sales performance.
+          Fetch initiated at build time in your serverless functions environment
+          <br />
+          Fetch resolved at build time in your serverless functions environment
         </CardDescription>
       </CardHeader>
       <CardContent>
