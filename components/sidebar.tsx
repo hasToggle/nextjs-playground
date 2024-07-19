@@ -61,7 +61,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
               Props
             </Button>
             <Button
-              onClick={() => router.push("/react-state")}
+              onClick={() => router.push("/react-basics/react-state")}
               variant="ghost"
               className="w-full justify-start"
             >
@@ -83,7 +83,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
               React State
             </Button>
             <Button
-              onClick={() => router.push("/component-lifecycle")}
+              onClick={() => router.push("/react-basics/component-lifecycle")}
               variant="ghost"
               className="w-full justify-start"
             >
@@ -110,7 +110,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
           </h2>
           <div className="space-y-1">
             <Button
-              onClick={() => router.push("/products/ssr")}
+              onClick={() => router.push("/data-fetching/ssr")}
               variant="ghost"
               className="w-full justify-start"
             >
@@ -130,7 +130,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
               Data Fetching
             </Button>
             <Button
-              onClick={() => router.push("/products")}
+              onClick={() => router.push("/data-fetching/composition-patterns")}
               variant="ghost"
               className="w-full justify-start"
             >
