@@ -55,6 +55,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 ISR
               </TabsTrigger>
               <TabsTrigger
+                onClick={() => router.push("/data-fetching/streaming")}
+                value="streaming"
+              >
+                Streaming
+              </TabsTrigger>
+              <TabsTrigger
+                onClick={() => router.push("/data-fetching/use-promise")}
+                value="use-promise"
+              >
+                Use API
+              </TabsTrigger>
+              <TabsTrigger
                 onClick={() => router.push("/data-fetching/csr")}
                 value="csr"
               >
@@ -73,6 +85,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </TabsContent>
           <TabsContent
             value="isr"
+            className="h-full flex-col border-none p-0 data-[state=active]:flex"
+          >
+            {children}
+          </TabsContent>
+          <TabsContent
+            value="streaming"
+            className="h-full flex-col border-none p-0 data-[state=active]:flex"
+          >
+            {children}
+          </TabsContent>
+          <TabsContent
+            value="use-promise"
             className="h-full flex-col border-none p-0 data-[state=active]:flex"
           >
             {children}
