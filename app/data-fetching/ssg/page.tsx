@@ -13,6 +13,8 @@ import Table from "../table";
 import Products from "../products";
 import { Suspense } from "react";
 
+export const dynamic = "force-static";
+
 export default async function SSG() {
   /* fake a delay of 3 seconds */
   await new Promise((resolve) => setTimeout(resolve, 3000));

@@ -110,7 +110,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
           </h2>
           <div className="space-y-1">
             <Button
-              onClick={() => router.push("/data-fetching/ssr")}
+              onClick={() => router.push("/data-fetching")}
               variant="ghost"
               className="w-full justify-start"
             >
