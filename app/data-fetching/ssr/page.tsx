@@ -13,10 +13,14 @@ import { Badge } from "@/components/ui/badge";
 
 import Table from "../table";
 import Products from "../products";
+import DataFetchingTabs from "../tabs";
+
+import { products } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
-export default function SSR() {
+export default async function SSR() {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return (
     <Card className="relative border-sky-200">
       <Badge
@@ -35,18 +39,20 @@ export default function SSR() {
           environment.
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <Suspense fallback={<div>Loading ...</div>}>
+      <DataFetchingTabs>
+        <CardContent>
           <Table>
-            <Products />
+            <Suspense fallback={<div>Loading ...</div>}>
+              <Products products={products} />
+            </Suspense>
           </Table>
-        </Suspense>
-      </CardContent>
-      <CardFooter>
-        <div className="text-xs text-muted-foreground">
-          Showing <strong>1-10</strong> of <strong>32</strong> products
-        </div>
-      </CardFooter>
+        </CardContent>
+        <CardFooter>
+          <div className="text-xs text-muted-foreground">
+            Showing <strong>1-10</strong> of <strong>32</strong> products
+          </div>
+        </CardFooter>
+      </DataFetchingTabs>
     </Card>
   );
 }

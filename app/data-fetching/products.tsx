@@ -13,15 +13,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { TableCell, TableRow } from "@/components/ui/table";
+import { TableCell, TableRow, TableBody } from "@/components/ui/table";
+import { Product } from "@/lib/data";
 
-import { products } from "@/lib/data";
-
-export default async function Products() {
-  /* fake a delay of 3 seconds */
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+export default function Products({ products = [] }: { products: Product[] }) {
   return (
-    <>
+    <TableBody>
       {products.map((product) => (
         <TableRow key={product.id}>
           <TableCell className="hidden sm:table-cell">
@@ -63,6 +60,6 @@ export default async function Products() {
           </TableCell>
         </TableRow>
       ))}
-    </>
+    </TableBody>
   );
 }

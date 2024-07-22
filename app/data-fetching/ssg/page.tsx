@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import {
   Card,
   CardContent,
@@ -11,13 +13,11 @@ import { Badge } from "@/components/ui/badge";
 
 import Table from "../table";
 import Products from "../products";
-import { Suspense } from "react";
+import DataFetchingTabs from "../tabs";
 
-export const dynamic = "force-static";
+import { loader } from "@/lib/fake-db";
 
-export default async function SSG() {
-  /* fake a delay of 3 seconds */
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+export default function SSG() {
   return (
     <Card className="relative border-sky-200">
       <Badge
@@ -34,18 +34,26 @@ export default async function SSG() {
           Fetch resolved at build time in your serverless functions environment
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <Suspense fallback={<div>Loading ...</div>}>
+      <DataFetchingTabs>
+        <CardContent>
           <Table>
-            <Products />
+            <Suspense fallback={<div>Loading ...</div>}>
+              <GoFetch />
+            </Suspense>
           </Table>
-        </Suspense>
-      </CardContent>
-      <CardFooter>
-        <div className="text-xs text-muted-foreground">
-          Showing <strong>1-10</strong> of <strong>32</strong> products
-        </div>
-      </CardFooter>
+        </CardContent>
+        <CardFooter>
+          <div className="text-xs text-muted-foreground">
+            Showing <strong>1-10</strong> of <strong>32</strong> products
+          </div>
+        </CardFooter>
+      </DataFetchingTabs>
     </Card>
   );
+}
+
+async function GoFetch() {
+  /* fake a delay of 3 seconds */
+  const products = await loader();
+  return <Products products={products} />;
 }

@@ -1,3 +1,3 @@
-export default function SSRPage() {
+export default function DataFetching() {
   return null;
 }

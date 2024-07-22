@@ -1,10 +1,4 @@
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export default function TableOfProducts({
   children,
@@ -28,7 +22,7 @@ export default function TableOfProducts({
           </TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>{children}</TableBody>
+      {children}
     </Table>
   );
 }

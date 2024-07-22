@@ -14,9 +14,12 @@ import { Badge } from "@/components/ui/badge";
 import Table from "../table";
 import Products from "../products";
 
+import { products } from "@/lib/data";
+
 export const revalidate = 30;
 
-export default function ISR() {
+export default async function ISR() {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return (
     <Card className="relative border-sky-200">
       <Badge
@@ -38,7 +41,7 @@ export default function ISR() {
       <CardContent>
         <Suspense fallback={<div>Loading ...</div>}>
           <Table>
-            <Products />
+            <Products products={products} />
           </Table>
         </Suspense>
       </CardContent>
