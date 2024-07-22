@@ -39,7 +39,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <path d="M16 6H3" />
                 <path d="M12 18H3" />
               </svg>
-              JSX
+              JSX 🚧
             </Button>
             <Button variant="ghost" className="w-full justify-start">
               <svg
@@ -58,7 +58,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
                 <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19" />
               </svg>
-              Props
+              Props 🚧
             </Button>
             <Button
               onClick={() => router.push("/react-basics/react-state")}
@@ -147,7 +147,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <circle cx="8" cy="18" r="4" />
                 <path d="M12 18V2l7 4" />
               </svg>
-              Composition Patterns
+              Composition Patterns 🚧
             </Button>
           </div>
         </div>

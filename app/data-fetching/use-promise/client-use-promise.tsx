@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { use, useState } from "react";
 
 export default function ClientComponent({
@@ -25,9 +26,11 @@ export default function ClientComponent({
         {prods.map((product) => (
           <a key={product.id} href={product.href} className="group">
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-              <img
+              <Image
                 src={product.imageSrc}
                 alt={product.imageAlt}
+                width={64}
+                height={64}
                 className="h-full w-full object-cover object-center group-hover:opacity-75"
               />
             </div>
