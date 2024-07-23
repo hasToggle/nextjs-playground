@@ -1,5 +1,6 @@
 import "server-only";
 
+import { revalidatePath } from "next/cache";
 /* import { Suspense } from "react"; */
 
 import {
@@ -64,6 +65,7 @@ export default function SSR() {
 }
 
 async function GoFetch() {
+  revalidatePath("/data-fetching/ssr");
   /* fake a delay of 3 seconds */
   const products = await loader();
   return <Products products={products} />;
