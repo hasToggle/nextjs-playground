@@ -19,6 +19,7 @@ import DataFetchingTabs from "../tabs";
 
 import { products } from "@/lib/data";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 30;
 
 export default async function ISR() {

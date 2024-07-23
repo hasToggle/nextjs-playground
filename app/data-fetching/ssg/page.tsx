@@ -19,6 +19,8 @@ import DataFetchingTabs from "../tabs";
 
 import { loader } from "@/lib/fake-db";
 
+export const dynamic = "force-static";
+
 export default function SSG() {
   return (
     <Card className="relative border-sky-200">
