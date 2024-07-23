@@ -27,7 +27,7 @@ export default async function ISR() {
         className="absolute left-3 -top-3 bg-white border-sky-200"
         variant="outline"
       >
-        Server Component (region US1)
+        Server Component
       </Badge>
       <CardHeader>
         <CardTitle>Products</CardTitle>
