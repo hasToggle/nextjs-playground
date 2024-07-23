@@ -16,6 +16,7 @@ import { type Product } from "@/lib/data";
 
 import Table from "../table";
 import Products from "../products";
+import DataFetchingTabs from "../tabs";
 
 export default function CSR() {
   const [products, setProducts] = useState<Product[] | []>([]);
@@ -45,18 +46,20 @@ export default function CSR() {
           Fetch resolved at request time in your browser.
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <Suspense fallback={<div>Loading ...</div>}>
-          <Table>
-            <Products products={products} />
-          </Table>
-        </Suspense>
-      </CardContent>
-      <CardFooter>
-        <div className="text-xs text-muted-foreground">
-          Showing <strong>1-10</strong> of <strong>32</strong> products
-        </div>
-      </CardFooter>
+      <DataFetchingTabs>
+        <CardContent>
+          <Suspense fallback={<div>Loading ...</div>}>
+            <Table>
+              <Products products={products} />
+            </Table>
+          </Suspense>
+        </CardContent>
+        <CardFooter>
+          <div className="text-xs text-muted-foreground">
+            Showing <strong>1-10</strong> of <strong>32</strong> products
+          </div>
+        </CardFooter>
+      </DataFetchingTabs>
     </Card>
   );
 }

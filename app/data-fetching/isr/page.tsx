@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 
 import Table from "../table";
 import Products from "../products";
+import DataFetchingTabs from "../tabs";
 
 import { products } from "@/lib/data";
 
@@ -38,18 +39,20 @@ export default async function ISR() {
           environment.
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <Suspense fallback={<div>Loading ...</div>}>
-          <Table>
-            <Products products={products} />
-          </Table>
-        </Suspense>
-      </CardContent>
-      <CardFooter>
-        <div className="text-xs text-muted-foreground">
-          Showing <strong>1-10</strong> of <strong>32</strong> products
-        </div>
-      </CardFooter>
+      <DataFetchingTabs>
+        <CardContent>
+          <Suspense fallback={<div>Loading ...</div>}>
+            <Table>
+              <Products products={products} />
+            </Table>
+          </Suspense>
+        </CardContent>
+        <CardFooter>
+          <div className="text-xs text-muted-foreground">
+            Showing <strong>1-10</strong> of <strong>32</strong> products
+          </div>
+        </CardFooter>
+      </DataFetchingTabs>
     </Card>
   );
 }

@@ -10,17 +10,21 @@ import {
 } from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge";
+import { TableBody } from "@/components/ui/table";
 
 import Table from "../table";
 import Products from "../products";
 import DataFetchingTabs from "../tabs";
+import EmptyRow from "../empty-row-skeleton";
 
-import { products } from "@/lib/data";
+import { loader } from "@/lib/fake-db";
 
 export const dynamic = "force-dynamic";
 
-export default async function SSR() {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+export default function SSR() {
+  const skeleton = Array.from({ length: 4 }, (_, index) => (
+    <EmptyRow key={index} />
+  ));
   return (
     <Card className="relative border-sky-200">
       <Badge
@@ -42,8 +46,8 @@ export default async function SSR() {
       <DataFetchingTabs>
         <CardContent>
           <Table>
-            <Suspense fallback={<div>Loading ...</div>}>
-              <Products products={products} />
+            <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
+              <GoFetch />
             </Suspense>
           </Table>
         </CardContent>
@@ -55,4 +59,10 @@ export default async function SSR() {
       </DataFetchingTabs>
     </Card>
   );
+}
+
+async function GoFetch() {
+  /* fake a delay of 3 seconds */
+  const products = await loader();
+  return <Products products={products} />;
 }

@@ -5,15 +5,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div>
           <div>
             <h2 className="text-2xl font-bold tracking-tight">
-              Server-side Rendering
+              React Server Components
             </h2>
             <p className="text-muted-foreground">
-              Cached products are fetched at build time and are static. Dynamic
-              products are fetched on each request.
+              When using the App Router in Next, you are automatically opted
+              into using React Server Components. By default, every component is
+              a Server Component.
             </p>
             <p className="text-muted-foreground">
-              Where and when do you initiate fetching data and where do you
-              display it?
+              To better understand the Server/Client Component model, see the
+              demo below.
             </p>
           </div>
         </div>

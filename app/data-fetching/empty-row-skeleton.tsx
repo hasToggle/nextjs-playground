@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { MoreHorizontal } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -10,50 +9,27 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { TableCell, TableRow, TableBody } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
+import { TableCell, TableRow } from "@/components/ui/table";
 
-import EmptyRow from "../empty-row-skeleton";
-import { ImageLink, TextLink } from "../links";
-
-import { getProducts, getProduct } from "@/lib/fake-db";
-
-export default function Products() {
-  const products = getProducts();
+export default function EmptyRow() {
   return (
-    <TableBody>
-      {products.map((product) => (
-        <Suspense key={product.id} fallback={<EmptyRow />}>
-          <Item id={product.id} />
-        </Suspense>
-      ))}
-    </TableBody>
-  );
-}
-
-async function Item({ id }: { id: number }) {
-  const product = await getProduct(id);
-
-  if (!product) return null;
-
-  return (
-    <TableRow key={product?.id || Math.random().toString(36).substring(2)}>
+    <TableRow key={Math.random().toString(36).substring(2)}>
       <TableCell className="hidden sm:table-cell">
-        <ImageLink
-          id={product?.id}
-          alt={product?.imageAlt}
-          src={product?.imageSrc}
-        />
+        <Skeleton className="h-[64px] w-[64px] rounded-md bg-gray-200" />
       </TableCell>
 
       <TableCell className="font-medium">
-        <TextLink id={product?.id} name={product?.name} />
+        <Skeleton className="h-4 w-[160px] bg-gray-200" />
       </TableCell>
 
       <TableCell>
         <Badge variant="outline">Draft</Badge>
       </TableCell>
 
-      <TableCell className="hidden md:table-cell">{product?.price}</TableCell>
+      <TableCell className="hidden md:table-cell">
+        <Skeleton className="h-4 w-[30px] bg-gray-200" />
+      </TableCell>
 
       <TableCell className="hidden md:table-cell">25</TableCell>
       <TableCell className="hidden md:table-cell">

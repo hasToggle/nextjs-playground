@@ -1,7 +1,20 @@
 "use client";
 
-import Image from "next/image";
 import { use, useState } from "react";
+import { MoreHorizontal } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { TableCell, TableRow, TableBody } from "@/components/ui/table";
+
+import { ImageLink, TextLink } from "../links";
 
 export default function ClientComponent({
   /* if some props can't be serialized, why not make the linter scream at us here? => Because you can wrap this component within another client component and pass props then */
@@ -14,35 +27,48 @@ export default function ClientComponent({
   const [count, setCount] = useState(0);
   const prods = use(products);
   return (
-    <>
-      <h2>Client Component</h2>
-      <button
-        className="px-8 py-2 bg-gray-600 rounded-md"
-        onClick={() => setCount(count + 1)}
-      >
-        {count}
-      </button>
-      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-        {prods.map((product) => (
-          <a key={product.id} href={product.href} className="group">
-            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-              <Image
-                src={product.imageSrc}
-                alt={product.imageAlt}
-                width={64}
-                height={64}
-                className="h-full w-full object-cover object-center group-hover:opacity-75"
-              />
-            </div>
-            <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
-            <p className="mt-1 text-lg font-medium text-gray-900">
-              {product.price}
-            </p>
-          </a>
-        ))}
-      </div>
-      <p>Your children:</p>
-      <div>{children}</div>
-    </>
+    <TableBody>
+      {prods.map((product) => (
+        <TableRow key={product.id}>
+          <TableCell className="hidden sm:table-cell">
+            <ImageLink
+              id={product.id}
+              alt={product.imageAlt}
+              src={product.imageSrc}
+            />
+          </TableCell>
+
+          <TableCell className="font-medium">
+            <TextLink id={product.id} name={product.name} />
+          </TableCell>
+
+          <TableCell>
+            <Badge variant="outline">Draft</Badge>
+          </TableCell>
+          <TableCell className="hidden md:table-cell">
+            {product.price}
+          </TableCell>
+          <TableCell className="hidden md:table-cell">25</TableCell>
+          <TableCell className="hidden md:table-cell">
+            {new Date().toISOString()}
+          </TableCell>
+          <TableCell>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button aria-haspopup="true" size="icon" variant="ghost">
+                  <MoreHorizontal className="h-4 w-4" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem>Delete</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
   );
 }
