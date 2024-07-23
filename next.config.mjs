@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     optimizePackageImports: ["shiki"],
+    ppr: true,
   },
   images: {
     remotePatterns: [
