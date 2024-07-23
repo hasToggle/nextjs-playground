@@ -21,3 +21,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
+/* babel-plugin-react-compiler */
