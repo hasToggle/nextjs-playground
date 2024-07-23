@@ -16,8 +16,6 @@ export const metadata: Metadata = {
   description: "Interactive display of Next.js features.",
 };
 
-export const experimental_ppr = false;
-
 export default function RootLayout({
   children,
 }: Readonly<{

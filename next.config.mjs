@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
-    ppr: "incremental",
+    ppr: "true",
   },
   transpilePackages: ["shiki"],
   images: {
