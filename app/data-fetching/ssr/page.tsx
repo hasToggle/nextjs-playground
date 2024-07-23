@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+/* import { Suspense } from "react"; */
 
 import {
   Card,
@@ -47,9 +47,9 @@ export default function SSR() {
       <DataFetchingTabs>
         <CardContent>
           <Table>
-            <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
-              <GoFetch />
-            </Suspense>
+            {/*  <Suspense fallback={<TableBody>{skeleton}</TableBody>}> */}
+            <GoFetch />
+            {/* </Suspense> */}
           </Table>
         </CardContent>
         <CardFooter>

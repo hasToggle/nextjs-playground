@@ -10,7 +10,7 @@ export default async function SSR({ params }: { params: { id: string } }) {
   const product = products.find(
     (product) => product.id === parseInt(params.id)
   );
-  console.log("ID:", params);
+
   if (!product) {
     return <h2>Product not found</h2>;
   }

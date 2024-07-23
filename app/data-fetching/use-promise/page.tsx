@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+/* import { Suspense } from "react"; */
 
 import {
   Card,
@@ -77,9 +77,9 @@ function GoFetch() {
 
   return (
     <>
-      <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
-        <ClientComponent products={products} />
-      </Suspense>
+      {/* <Suspense fallback={<TableBody>{skeleton}</TableBody>}> */}
+      <ClientComponent products={products} />
+      {/* </Suspense> */}
     </>
   );
 }
