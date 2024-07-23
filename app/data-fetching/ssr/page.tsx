@@ -1,3 +1,5 @@
+import "server-only";
+
 /* import { Suspense } from "react"; */
 
 import {
@@ -10,7 +12,6 @@ import {
 } from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge";
-import { TableBody } from "@/components/ui/table";
 
 import Table from "../table";
 import Products from "../products";
