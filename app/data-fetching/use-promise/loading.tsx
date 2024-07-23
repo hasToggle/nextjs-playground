@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import {
   Card,
   CardContent,
@@ -13,15 +11,11 @@ import { Badge } from "@/components/ui/badge";
 import { TableBody } from "@/components/ui/table";
 
 import Table from "../table";
-import Products from "../products";
+
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
 
-import { loader } from "@/lib/fake-db";
-
-export const dynamic = "force-dynamic";
-
-export default function SSR() {
+export default function Loading() {
   const skeleton = Array.from({ length: 4 }, (_, index) => (
     <EmptyRow key={index} />
   ));
@@ -37,20 +31,24 @@ export default function SSR() {
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>
-          Fetch initiated at request time in your serverless functions
-          environment.
+          Fetch initiated at build time in your serverless functions environment
           <br />
-          Fetch resolved at request time in your serverless functions
-          environment.
+          Fetch resolved at build time in your serverless functions environment
         </CardDescription>
       </CardHeader>
       <DataFetchingTabs>
         <CardContent>
-          <Table>
-            <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
-              <GoFetch />
-            </Suspense>
-          </Table>
+          <Card className="relative border-orange-200">
+            <Badge
+              className="absolute left-3 -top-3 bg-white border-orange-200"
+              variant="outline"
+            >
+              Client Component
+            </Badge>
+            <Table>
+              <TableBody>{skeleton}</TableBody>
+            </Table>
+          </Card>
         </CardContent>
         <CardFooter>
           <div className="text-xs text-muted-foreground">
@@ -60,10 +58,4 @@ export default function SSR() {
       </DataFetchingTabs>
     </Card>
   );
-}
-
-async function GoFetch() {
-  /* fake a delay of 3 seconds */
-  const products = await loader();
-  return <Products products={products} />;
 }

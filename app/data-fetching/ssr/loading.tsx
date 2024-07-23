@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import {
   Card,
   CardContent,
@@ -13,15 +11,11 @@ import { Badge } from "@/components/ui/badge";
 import { TableBody } from "@/components/ui/table";
 
 import Table from "../table";
-import Products from "../products";
+
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
 
-import { loader } from "@/lib/fake-db";
-
-export const dynamic = "force-dynamic";
-
-export default function SSR() {
+export default function Loading() {
   const skeleton = Array.from({ length: 4 }, (_, index) => (
     <EmptyRow key={index} />
   ));
@@ -47,9 +41,7 @@ export default function SSR() {
       <DataFetchingTabs>
         <CardContent>
           <Table>
-            <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
-              <GoFetch />
-            </Suspense>
+            <TableBody>{skeleton}</TableBody>
           </Table>
         </CardContent>
         <CardFooter>
@@ -60,10 +52,4 @@ export default function SSR() {
       </DataFetchingTabs>
     </Card>
   );
-}
-
-async function GoFetch() {
-  /* fake a delay of 3 seconds */
-  const products = await loader();
-  return <Products products={products} />;
 }
