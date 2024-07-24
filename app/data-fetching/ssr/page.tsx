@@ -43,6 +43,15 @@ export default function SSR() {
           <br />
           Fetch resolved at request time in your serverless functions
           environment.
+          <br />
+          Without PPR, every request goes back to the server in your specified
+          region, which rebuilds the static shell and sends back the HTML while
+          streaming in any dynamic content. With PPR, requests go to a CDN close
+          to the user&apos;s location, which sends back the static shell and
+          makes a dynamic request to your server for streaming the dynamic
+          content. The initial response is faster with PPR because CDNs are
+          usually closer to the user than your server, and the resource does not
+          have to be rebuild because it&apos; static anyway.
         </CardDescription>
       </CardHeader>
       <DataFetchingTabs>
