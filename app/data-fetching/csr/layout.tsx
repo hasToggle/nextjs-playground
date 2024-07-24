@@ -15,18 +15,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
    */
   const requestTime = new Date().toISOString();
   return (
-    <Card className="relative border-sky-200">
+    <Card className="relative border-orange-200">
       <Badge
-        className="absolute left-3 -top-3 bg-white border-sky-200"
+        className="absolute left-3 -top-3 bg-white border-orange-200"
         variant="outline"
       >
-        Server Component
+        Client Component
       </Badge>
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>
-          Fetch initiated at request time ({requestTime}) in your serverless
-          functions environment.
+          Fetch initiated at request time ({requestTime}) in your browser.
         </CardDescription>
       </CardHeader>
       {children}

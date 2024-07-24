@@ -2,16 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { CardContent, CardFooter } from "@/components/ui/card";
 
-import { Badge } from "@/components/ui/badge";
 import { TableBody } from "@/components/ui/table";
 
 import { type Product } from "@/lib/data";
@@ -39,64 +31,10 @@ export default function CSR() {
     ));
 
     return (
-      <Card className="relative border-orange-200">
-        <Badge
-          className="absolute left-3 -top-3 bg-white border-orange-200"
-          variant="outline"
-        >
-          Client Component
-        </Badge>
-        <CardHeader>
-          <CardTitle>Products</CardTitle>
-          <CardDescription>
-            Fetch initiated at request time in your browser.
-            <br />
-            Fetch resolved at request time in your browser.
-          </CardDescription>
-        </CardHeader>
-        <DataFetchingTabs>
-          <CardContent>
-            <Table>
-              <TableBody>{skeleton}</TableBody>
-            </Table>
-          </CardContent>
-          <CardFooter>
-            <div className="text-xs text-muted-foreground">
-              Showing <strong>1-10</strong> of <strong>32</strong> products
-            </div>
-          </CardFooter>
-        </DataFetchingTabs>
-      </Card>
-    );
-  }
-
-  return (
-    <Card className="relative border-orange-200">
-      <Badge
-        className="absolute left-3 -top-3 bg-white border-orange-200"
-        variant="outline"
-      >
-        Client Component
-      </Badge>
-      <CardHeader>
-        <CardTitle>Products</CardTitle>
-        <CardDescription>
-          Fetch initiated at request time in your browser.
-          <br />
-          Fetch resolved at request time in your browser.
-        </CardDescription>
-      </CardHeader>
       <DataFetchingTabs>
         <CardContent>
           <Table>
-            <Products
-              fetchDetails={{
-                fetchedOn: "On Request",
-                time: new Date().toISOString(),
-                source: "Client",
-              }}
-              products={products}
-            />
+            <TableBody>{skeleton}</TableBody>
           </Table>
         </CardContent>
         <CardFooter>
@@ -105,6 +43,28 @@ export default function CSR() {
           </div>
         </CardFooter>
       </DataFetchingTabs>
-    </Card>
+    );
+  }
+
+  return (
+    <DataFetchingTabs>
+      <CardContent>
+        <Table>
+          <Products
+            fetchDetails={{
+              fetchedOn: "On Request",
+              time: new Date().toISOString(),
+              source: "Client",
+            }}
+            products={products}
+          />
+        </Table>
+      </CardContent>
+      <CardFooter>
+        <div className="text-xs text-muted-foreground">
+          Showing <strong>1-10</strong> of <strong>32</strong> products
+        </div>
+      </CardFooter>
+    </DataFetchingTabs>
   );
 }
