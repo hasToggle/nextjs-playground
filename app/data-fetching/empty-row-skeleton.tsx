@@ -1,6 +1,5 @@
 import { MoreHorizontal } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,17 +23,17 @@ export default function EmptyRow() {
       </TableCell>
 
       <TableCell>
-        <Badge variant="outline">Draft</Badge>
+        <Skeleton className="h-4 w-[80px] rounded-md bg-gray-200" />
       </TableCell>
 
       <TableCell className="hidden md:table-cell">
         <Skeleton className="h-4 w-[30px] bg-gray-200" />
       </TableCell>
 
-      <TableCell className="hidden md:table-cell">25</TableCell>
       <TableCell className="hidden md:table-cell">
-        {new Date().toISOString()}
+        <Skeleton className="h-4 w-[180px] rounded-md bg-gray-200" />
       </TableCell>
+
       <TableCell>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

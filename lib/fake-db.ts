@@ -6,7 +6,7 @@ export async function loader(): Promise<Product[]> {
   );
 }
 
-export function getProducts(): { id: number }[] {
+export function getProductIds(): { id: number }[] {
   return products.map((product) => ({
     id: product.id,
   }));

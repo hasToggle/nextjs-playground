@@ -13,9 +13,9 @@ export default function DataFetching() {
   return (
     <Card className="relative border-sky-200">
       <CardHeader>
-        <CardTitle>Products</CardTitle>
+        <CardTitle>Fetching data is a spectrum</CardTitle>
         <CardDescription>
-          Play around with the various data-fetching options.
+          There&apos;s more than one way of fetching data in Next.
         </CardDescription>
       </CardHeader>
       <DataFetchingTabs>

@@ -1,13 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { CardContent, CardFooter } from "@/components/ui/card";
 
-import { Badge } from "@/components/ui/badge";
 import { TableBody } from "@/components/ui/table";
 
 import Table from "../table";
@@ -21,35 +13,17 @@ export default function Loading() {
   ));
 
   return (
-    <Card className="relative border-sky-200">
-      <Badge
-        className="absolute left-3 -top-3 bg-white border-sky-200"
-        variant="outline"
-      >
-        Server Component
-      </Badge>
-      <CardHeader>
-        <CardTitle>Products</CardTitle>
-        <CardDescription>
-          Fetch initiated at request time in your serverless functions
-          environment.
-          <br />
-          Fetch resolved at request time in your serverless functions
-          environment.
-        </CardDescription>
-      </CardHeader>
-      <DataFetchingTabs>
-        <CardContent>
-          <Table>
-            <TableBody>{skeleton}</TableBody>
-          </Table>
-        </CardContent>
-        <CardFooter>
-          <div className="text-xs text-muted-foreground">
-            Showing <strong>1-10</strong> of <strong>32</strong> products
-          </div>
-        </CardFooter>
-      </DataFetchingTabs>
-    </Card>
+    <DataFetchingTabs>
+      <CardContent>
+        <Table>
+          <TableBody>{skeleton}</TableBody>
+        </Table>
+      </CardContent>
+      <CardFooter>
+        <div className="text-xs text-muted-foreground">
+          Showing <strong>1-10</strong> of <strong>32</strong> products
+        </div>
+      </CardFooter>
+    </DataFetchingTabs>
   );
 }

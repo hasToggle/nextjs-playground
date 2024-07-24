@@ -2,78 +2,52 @@ import "server-only";
 
 /* import { Suspense } from "react"; */
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import { Badge } from "@/components/ui/badge";
+import { CardContent, CardFooter } from "@/components/ui/card";
+/* import { TableBody } from "@/components/ui/table"; */
 
 import Table from "../table";
 import Products from "../products";
 import DataFetchingTabs from "../tabs";
-import EmptyRow from "../empty-row-skeleton";
+/* import EmptyRow from "../empty-row-skeleton"; */
 
 import { loader } from "@/lib/fake-db";
 
 export const dynamic = "force-dynamic";
 
 export default function SSR() {
-  const skeleton = Array.from({ length: 4 }, (_, index) => (
+  /* const skeleton = Array.from({ length: 4 }, (_, index) => (
     <EmptyRow key={index} />
-  ));
+  )); */
 
   return (
-    <Card className="relative border-sky-200">
-      <Badge
-        className="absolute left-3 -top-3 bg-white border-sky-200"
-        variant="outline"
-      >
-        Server Component
-      </Badge>
-      <CardHeader>
-        <CardTitle>Products</CardTitle>
-        <CardDescription>
-          Fetch initiated at request time in your serverless functions
-          environment.
-          <br />
-          Fetch resolved at request time in your serverless functions
-          environment.
-          <br />
-          Without PPR, every request goes back to the server in your specified
-          region, which rebuilds the static shell and sends back the HTML while
-          streaming in any dynamic content. With PPR, requests go to a CDN close
-          to the user&apos;s location, which sends back the static shell and
-          makes a dynamic request to your server for streaming the dynamic
-          content. The initial response is faster with PPR because CDNs are
-          usually closer to the user than your server, and the resource does not
-          have to be rebuild because it&apos; static anyway.
-        </CardDescription>
-      </CardHeader>
-      <DataFetchingTabs>
-        <CardContent>
-          <Table>
-            {/*  <Suspense fallback={<TableBody>{skeleton}</TableBody>}> */}
-            <GoFetch />
-            {/* </Suspense> */}
-          </Table>
-        </CardContent>
-        <CardFooter>
-          <div className="text-xs text-muted-foreground">
-            Showing <strong>1-10</strong> of <strong>32</strong> products
-          </div>
-        </CardFooter>
-      </DataFetchingTabs>
-    </Card>
+    <DataFetchingTabs>
+      <CardContent>
+        <Table>
+          {/* <Suspense fallback={<TableBody>{skeleton}</TableBody>}> */}
+          <GoFetch />
+          {/* </Suspense> */}
+        </Table>
+      </CardContent>
+      <CardFooter>
+        <div className="text-xs text-muted-foreground">
+          Showing <strong>1-10</strong> of <strong>32</strong> products
+        </div>
+      </CardFooter>
+    </DataFetchingTabs>
   );
 }
 
 async function GoFetch() {
   /* fake a delay of 3 seconds */
   const products = await loader();
-  return <Products products={products} />;
+  return (
+    <Products
+      fetchDetails={{
+        fetchedOn: "On Request",
+        time: new Date().toISOString(),
+        source: "Server",
+      }}
+      products={products}
+    />
+  );
 }

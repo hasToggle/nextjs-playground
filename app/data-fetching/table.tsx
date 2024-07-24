@@ -13,10 +13,9 @@ export default function TableOfProducts({
             <span className="sr-only">Image</span>
           </TableHead>
           <TableHead>Name</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead className="hidden md:table-cell">Price</TableHead>
-          <TableHead className="hidden md:table-cell">Total Sales</TableHead>
-          <TableHead className="hidden md:table-cell">Created at</TableHead>
+          <TableHead>Fetched</TableHead>
+          <TableHead className="hidden md:table-cell">Where</TableHead>
+          <TableHead className="hidden md:table-cell">When</TableHead>
           <TableHead>
             <span className="sr-only">Actions</span>
           </TableHead>

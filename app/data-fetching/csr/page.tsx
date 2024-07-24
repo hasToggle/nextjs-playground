@@ -37,6 +37,7 @@ export default function CSR() {
     const skeleton = Array.from({ length: 4 }, (_, index) => (
       <EmptyRow key={index} />
     ));
+
     return (
       <Card className="relative border-orange-200">
         <Badge
@@ -88,7 +89,14 @@ export default function CSR() {
       <DataFetchingTabs>
         <CardContent>
           <Table>
-            <Products products={products} />
+            <Products
+              fetchDetails={{
+                fetchedOn: "On Request",
+                time: new Date().toISOString(),
+                source: "Client",
+              }}
+              products={products}
+            />
           </Table>
         </CardContent>
         <CardFooter>

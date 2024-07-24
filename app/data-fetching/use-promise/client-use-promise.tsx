@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { use } from "react";
 import { MoreHorizontal } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -18,14 +18,24 @@ import { ImageLink, TextLink } from "../links";
 
 export default function ClientComponent({
   /* if some props can't be serialized, why not make the linter scream at us here? => Because you can wrap this component within another client component and pass props then */
+  fetchDetails = {
+    fetchedOn: "",
+    source: "",
+    time: "",
+  },
   products,
   children,
 }: {
+  fetchDetails: {
+    fetchedOn: string;
+    source: string;
+    time: string;
+  };
   products: Promise<Array<any>>;
   children?: React.ReactNode;
 }) {
-  const [count, setCount] = useState(0);
   const prods = use(products);
+  const { fetchedOn, source, time } = fetchDetails;
   return (
     <TableBody>
       {prods.map((product) => (
@@ -43,15 +53,13 @@ export default function ClientComponent({
           </TableCell>
 
           <TableCell>
-            <Badge variant="outline">Draft</Badge>
+            <Badge variant="outline">{fetchedOn}</Badge>
           </TableCell>
-          <TableCell className="hidden md:table-cell">
-            {product.price}
-          </TableCell>
-          <TableCell className="hidden md:table-cell">25</TableCell>
+          <TableCell className="hidden md:table-cell">{source}</TableCell>
           <TableCell className="hidden md:table-cell">
             {new Date().toISOString()}
           </TableCell>
+
           <TableCell>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

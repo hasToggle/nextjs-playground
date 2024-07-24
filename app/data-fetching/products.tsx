@@ -16,7 +16,22 @@ import {
 import { TableCell, TableRow, TableBody } from "@/components/ui/table";
 import { Product } from "@/lib/data";
 
-export default function Products({ products = [] }: { products: Product[] }) {
+export default function Products({
+  fetchDetails = {
+    fetchedOn: "",
+    source: "",
+    time: new Date().toISOString(),
+  },
+  products = [],
+}: {
+  fetchDetails: {
+    fetchedOn: string;
+    source: string;
+    time: string;
+  };
+  products: Product[];
+}) {
+  const { fetchedOn, source, time } = fetchDetails;
   return (
     <TableBody>
       {products.map((product) => (
@@ -34,15 +49,10 @@ export default function Products({ products = [] }: { products: Product[] }) {
           </TableCell>
 
           <TableCell>
-            <Badge variant="outline">Draft</Badge>
+            <Badge variant="outline">{fetchedOn}</Badge>
           </TableCell>
-          <TableCell className="hidden md:table-cell">
-            {product.price}
-          </TableCell>
-          <TableCell className="hidden md:table-cell">25</TableCell>
-          <TableCell className="hidden md:table-cell">
-            {new Date().toISOString()}
-          </TableCell>
+          <TableCell className="hidden md:table-cell">{source}</TableCell>
+          <TableCell className="hidden md:table-cell">{time}</TableCell>
           <TableCell>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

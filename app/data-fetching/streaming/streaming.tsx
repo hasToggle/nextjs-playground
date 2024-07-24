@@ -15,25 +15,48 @@ import { TableCell, TableRow, TableBody } from "@/components/ui/table";
 import EmptyRow from "../empty-row-skeleton";
 import { ImageLink, TextLink } from "../links";
 
-import { getProducts, getProduct } from "@/lib/fake-db";
+import { getProductIds, getProduct } from "@/lib/fake-db";
 
 export default function Products() {
-  const products = getProducts();
+  const products = getProductIds();
   return (
     <TableBody>
       {products.map((product) => (
         <Suspense key={product.id} fallback={<EmptyRow />}>
-          <Item id={product.id} />
+          <Item
+            fetchDetails={{
+              fetchedOn: "On Request",
+              time: "",
+              source: "Server",
+            }}
+            id={product.id}
+          />
         </Suspense>
       ))}
     </TableBody>
   );
 }
 
-async function Item({ id }: { id: number }) {
+async function Item({
+  fetchDetails = {
+    fetchedOn: "",
+    source: "",
+    time: "",
+  },
+  id,
+}: {
+  fetchDetails: {
+    fetchedOn: string;
+    source: string;
+    time: string;
+  };
+  id: number;
+}) {
   const product = await getProduct(id);
 
   if (!product) return null;
+
+  const { fetchedOn, source, time } = fetchDetails;
 
   return (
     <TableRow key={product?.id || Math.random().toString(36).substring(2)}>
@@ -50,15 +73,14 @@ async function Item({ id }: { id: number }) {
       </TableCell>
 
       <TableCell>
-        <Badge variant="outline">Draft</Badge>
+        <Badge variant="outline">{fetchedOn}</Badge>
       </TableCell>
 
-      <TableCell className="hidden md:table-cell">{product?.price}</TableCell>
-
-      <TableCell className="hidden md:table-cell">25</TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell className="hidden md:table-cell">{source}</TableCell>
+      <TableCell className="hidden md:table-cell text-sky-700 font-semibold">
         {new Date().toISOString()}
       </TableCell>
+
       <TableCell>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
