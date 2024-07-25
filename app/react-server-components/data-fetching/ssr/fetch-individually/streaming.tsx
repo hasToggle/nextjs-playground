@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { TableCell, TableRow, TableBody } from "@/components/ui/table";
 
-import EmptyRow from "../empty-row-skeleton";
-import { ImageLink, TextLink } from "../links";
+import EmptyRow from "../../empty-row-skeleton";
+import { ImageLink, TextLink } from "../../links";
 
 import { getProductIds, getProduct } from "@/lib/fake-db";
 

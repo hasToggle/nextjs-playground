@@ -1,11 +1,6 @@
 import "server-only";
 
-import {
-  CalendarIcon,
-  CodeIcon,
-  ClockIcon,
-  InfoCircledIcon,
-} from "@radix-ui/react-icons";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 import {
   Card,
@@ -16,11 +11,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
-  const requestTime = new Date().toISOString();
   return (
     <Card className="relative border-sky-200">
       <Badge
@@ -32,22 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>
-          <Card className="mt-7 p-4">
-            <span className="flex items-center text-base">
-              <ClockIcon className="mr-2 h-4 w-4" />
-              Fetch initiated at request time.
-            </span>
-            <span className="mt-2 flex items-center text-base">
-              <CodeIcon className="mr-2 h-4 w-4" />
-              In your serverless functions environment.
-            </span>
-            <span className="mt-2 flex items-center text-base">
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              At {requestTime}.
-            </span>
-          </Card>
-
-          <Card className="mt-10 p-4 inline-flex">
+          <Card className="p-4 inline-flex">
             <InfoCircledIcon className="mr-2 h-10 w-10" />
             Without PPR, every request goes back to the server in your specified
             region, which rebuilds the static shell and sends back the HTML

@@ -1,25 +1,17 @@
 import "server-only";
 
-import { Suspense } from "react";
 import { CalendarIcon, CodeIcon, ClockIcon } from "@radix-ui/react-icons";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { TableBody } from "@/components/ui/table";
 
-import SwitchIndividually from "./switch";
-import Table from "../table";
-import Products from "../products";
-import DataFetchingTabs from "../tabs";
-import EmptyRow from "../empty-row-skeleton";
-
-import { loader } from "@/lib/fake-db";
+import SwitchIndividually from "../switch";
+import Table from "../../table";
+import DataFetchingTabs from "../../tabs";
+import StreamingOutOfOrder from "./streaming";
 
 export const dynamic = "force-dynamic";
 
-export default function SSR() {
-  const skeleton = Array.from({ length: 4 }, (_, index) => (
-    <EmptyRow key={index} />
-  ));
+export default function SSRIndividually() {
   /*
    * Strictly speaking, the request for data comes a bit further down in the page component,
    * but for the demo it's convenient to snapshot the moment here.
@@ -45,9 +37,7 @@ export default function SSR() {
 
       <CardContent>
         <Table>
-          <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
-            <GoFetch />
-          </Suspense>
+          <StreamingOutOfOrder />
         </Table>
       </CardContent>
       <CardFooter>
@@ -56,20 +46,5 @@ export default function SSR() {
         </div>
       </CardFooter>
     </DataFetchingTabs>
-  );
-}
-
-async function GoFetch() {
-  /* fake a delay of 3 seconds */
-  const products = await loader();
-  return (
-    <Products
-      fetchDetails={{
-        fetchedOn: "On Request",
-        time: new Date().toISOString(),
-        source: "Server",
-      }}
-      products={products}
-    />
   );
 }

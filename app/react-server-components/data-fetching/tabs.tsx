@@ -13,7 +13,7 @@ export default function DataFetchingTabs({
   const pathname = usePathname();
 
   return (
-    <Tabs value={pathname.split("/")[3]} className="h-full space-y-6 p-6 pt-0">
+    <Tabs value={pathname.split("/")[3]} className="space-y-6 p-6 pt-0">
       <div className="space-between flex items-center">
         <TabsList>
           <TabsTrigger
@@ -40,14 +40,6 @@ export default function DataFetchingTabs({
             value="ssr"
           >
             SSR
-          </TabsTrigger>
-          <TabsTrigger
-            onClick={() =>
-              router.push("/react-server-components/data-fetching/streaming")
-            }
-            value="streaming"
-          >
-            Streaming
           </TabsTrigger>
           <TabsTrigger
             onClick={() =>
@@ -78,12 +70,6 @@ export default function DataFetchingTabs({
       </TabsContent>
       <TabsContent
         value="ssr"
-        className="h-full flex-col border-none p-0 data-[state=active]:flex"
-      >
-        {children}
-      </TabsContent>
-      <TabsContent
-        value="streaming"
         className="h-full flex-col border-none p-0 data-[state=active]:flex"
       >
         {children}
