@@ -65,9 +65,9 @@ async function GoFetch() {
   return (
     <Products
       fetchDetails={{
-        fetchedOn: "On Request",
+        fetchedOn: "at request time",
         time: new Date().toISOString(),
-        source: "Server",
+        source: "on the Server",
       }}
       products={products}
     />

@@ -9,11 +9,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
-  const requestTime = new Date().toISOString();
   return (
     <Card className="relative border-sky-200">
       <Badge
@@ -25,8 +20,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>
-          Fetch initiated at request time ({requestTime}) in your serverless
-          functions environment.
+          <span className="p-4 h-24 block border rounded-lg">
+            Products are static for 30 seconds. If a request is made within 30
+            seconds, the cached HTML is served from a CDN. After 30 seconds, the
+            cache is invalidated, and the next request will trigger a rebuild of
+            the page in the background but still serve the stale HTML in the
+            meantime. Refresh the page once more to see the new content.
+          </span>
         </CardDescription>
       </CardHeader>
       {children}

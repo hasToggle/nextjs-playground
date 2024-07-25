@@ -1,3 +1,5 @@
+import "server-only";
+
 import { products, Product } from "./data";
 
 export async function loader(): Promise<Product[]> {
@@ -21,6 +23,10 @@ export async function getProduct(id: number): Promise<Product | undefined> {
   );
 }
 
-export function getAllProducts() {
-  return products;
+export async function getAllProducts() {
+  return await new Promise<Array<any>>((resolve) => {
+    setTimeout(() => {
+      resolve(products);
+    }, 3000);
+  });
 }

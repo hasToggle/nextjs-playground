@@ -53,8 +53,14 @@ export default function Products({
               {fetchedOn}
             </Badge>
           </TableCell>
-          <TableCell className="hidden md:table-cell">{source}</TableCell>
-          <TableCell className="hidden md:table-cell">{time}</TableCell>
+          <TableCell className="hidden md:table-cell">
+            <Badge variant="outline" className="-ml-2.5">
+              {source}
+            </Badge>
+          </TableCell>
+          <TableCell className="hidden md:table-cell" suppressHydrationWarning>
+            {time}
+          </TableCell>
           <TableCell>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

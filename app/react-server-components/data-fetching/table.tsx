@@ -13,7 +13,7 @@ export default function TableOfProducts({
             <span className="sr-only">Image</span>
           </TableHead>
           <TableHead>Name</TableHead>
-          <TableHead>Fetched</TableHead>
+          <TableHead>Resolved</TableHead>
           <TableHead className="hidden md:table-cell">Where</TableHead>
           <TableHead className="hidden md:table-cell">When</TableHead>
           <TableHead>

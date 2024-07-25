@@ -9,11 +9,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
-  const requestTime = new Date().toISOString();
   return (
     <Card className="relative border-orange-200">
       <Badge
@@ -25,7 +20,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>
-          Fetch initiated at request time ({requestTime}) in your browser.
+          <span className="p-4 h-24 block border rounded-lg">
+            Products are fetched on the client using useEffect and useState.
+            This is the classic client side rendering (CSR) approach. For
+            simplicity, the demo does not make use of any libraries like SWR or
+            React Query. For production, you should consider using any one of
+            the available options.
+          </span>
         </CardDescription>
       </CardHeader>
       {children}

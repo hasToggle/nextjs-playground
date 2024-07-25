@@ -9,11 +9,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
-  const requestTime = new Date().toISOString();
   return (
     <Card className="relative border-sky-200">
       <Badge
@@ -25,8 +20,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <CardHeader>
         <CardTitle>Products</CardTitle>
         <CardDescription>
-          Fetch initiated at request time ({requestTime}) in your serverless
-          functions environment.
+          <span className="p-4 h-24 block border rounded-lg">
+            Products are initiated as a Promise at request time on the server
+            (without awaiting it) and forwarded to the client. Client Components
+            cannot be asynchronous, but they can be suspended with the use-API
+            which awaits for the Promise to resolve inside a Client Component.
+            While the Promise is pending, the Suspense boundary will use the
+            fallback.
+          </span>
         </CardDescription>
       </CardHeader>
       {children}

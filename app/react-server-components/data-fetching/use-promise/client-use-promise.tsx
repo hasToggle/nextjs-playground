@@ -53,10 +53,16 @@ export default function ClientComponent({
           </TableCell>
 
           <TableCell>
-            <Badge variant="outline">{fetchedOn}</Badge>
+            <Badge variant="outline" className="-ml-2.5">
+              {fetchedOn}
+            </Badge>
           </TableCell>
-          <TableCell className="hidden md:table-cell">{source}</TableCell>
           <TableCell className="hidden md:table-cell">
+            <Badge variant="outline" className="-ml-2.5">
+              {source}
+            </Badge>
+          </TableCell>
+          <TableCell className="hidden md:table-cell" suppressHydrationWarning>
             {new Date().toISOString()}
           </TableCell>
 

@@ -1,6 +1,7 @@
 import "server-only";
 
-/* import { Suspense } from "react"; */
+import { Suspense } from "react";
+import { CalendarIcon, CodeIcon, ClockIcon } from "@radix-ui/react-icons";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
@@ -18,8 +19,30 @@ import ClientComponent from "./client-use-promise";
 export const dynamic = "force-dynamic";
 
 export default function UsePromise() {
+  /*
+   * Strictly speaking, the request for data comes a bit further down in the page component,
+   * but for the demo it's convenient to snapshot the moment here.
+   */
+  const requestTime = new Date().toISOString();
   return (
     <DataFetchingTabs>
+      <Card className="mb-3 p-4">
+        <span className="flex items-center text-base">
+          <ClockIcon className="mr-2 h-4 w-4" />
+          Fetch initiated at request time.
+        </span>
+        <span className="mt-2 flex items-center text-base">
+          <CodeIcon className="mr-2 h-4 w-4" />
+          In your serverless functions environment.
+        </span>
+        <span
+          className="mt-2 flex items-center text-base"
+          suppressHydrationWarning
+        >
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          At {requestTime}.
+        </span>
+      </Card>
       <CardContent>
         <Card className="relative border-orange-200">
           <Badge
@@ -43,28 +66,22 @@ export default function UsePromise() {
 }
 
 function GoFetch() {
-  const products = new Promise<Array<any>>((resolve) => {
-    setTimeout(() => {
-      resolve(getAllProducts());
-    }, 3000);
-  });
+  const products = getAllProducts();
 
-  /* const skeleton = Array.from({ length: 4 }, (_, index) => (
+  const skeleton = Array.from({ length: 4 }, (_, index) => (
     <EmptyRow key={index} />
-  )); */
+  ));
 
   return (
-    <>
-      {/* <Suspense fallback={<TableBody>{skeleton}</TableBody>}> */}
+    <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
       <ClientComponent
         fetchDetails={{
-          fetchedOn: "On Request",
+          fetchedOn: "at request time",
           time: new Date().toISOString(),
-          source: "Client",
+          source: "on the Client",
         }}
         products={products}
       />
-      {/* </Suspense> */}
-    </>
+    </Suspense>
   );
 }
