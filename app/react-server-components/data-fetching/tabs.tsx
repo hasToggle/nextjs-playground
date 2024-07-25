@@ -13,42 +13,54 @@ export default function DataFetchingTabs({
   const pathname = usePathname();
 
   return (
-    <Tabs value={pathname.split("/")[2]} className="h-full space-y-6 p-6 pt-0">
+    <Tabs value={pathname.split("/")[3]} className="h-full space-y-6 p-6 pt-0">
       <div className="space-between flex items-center">
         <TabsList>
           <TabsTrigger
-            onClick={() => router.push("/data-fetching/ssg")}
+            onClick={() =>
+              router.push("/react-server-components/data-fetching/ssg")
+            }
             value="ssg"
             className="relative"
           >
             SSG
           </TabsTrigger>
           <TabsTrigger
-            onClick={() => router.push("/data-fetching/isr")}
+            onClick={() =>
+              router.push("/react-server-components/data-fetching/isr")
+            }
             value="isr"
           >
             ISR
           </TabsTrigger>
           <TabsTrigger
-            onClick={() => router.push("/data-fetching/ssr")}
+            onClick={() =>
+              router.push("/react-server-components/data-fetching/ssr")
+            }
             value="ssr"
           >
             SSR
           </TabsTrigger>
           <TabsTrigger
-            onClick={() => router.push("/data-fetching/streaming")}
+            onClick={() =>
+              router.push("/react-server-components/data-fetching/streaming")
+            }
             value="streaming"
           >
             Streaming
           </TabsTrigger>
           <TabsTrigger
-            onClick={() => router.push("/data-fetching/use-promise")}
+            onClick={() =>
+              router.push("/react-server-components/data-fetching/use-promise")
+            }
             value="use-promise"
           >
             use API
           </TabsTrigger>
           <TabsTrigger
-            onClick={() => router.push("/data-fetching/csr")}
+            onClick={() =>
+              router.push("/react-server-components/data-fetching/csr")
+            }
             value="csr"
           >
             CSR

@@ -11,11 +11,14 @@ import DataFetchingTabs from "./tabs";
 
 export default function DataFetching() {
   return (
-    <Card className="relative border-sky-200">
+    <Card>
       <CardHeader>
-        <CardTitle>Fetching data is a spectrum</CardTitle>
+        <CardTitle>
+          There&apos;s more than one way of fetching data in Next
+        </CardTitle>
         <CardDescription>
-          There&apos;s more than one way of fetching data in Next.
+          Fetching data is a spectrum. It spans from the server to the client
+          and everything in between.
         </CardDescription>
       </CardHeader>
       <DataFetchingTabs>

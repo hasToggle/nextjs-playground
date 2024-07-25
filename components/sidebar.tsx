@@ -110,7 +110,9 @@ export function Sidebar({ className, playlists }: SidebarProps) {
           </h2>
           <div className="space-y-1">
             <Button
-              onClick={() => router.push("/data-fetching")}
+              onClick={() =>
+                router.push("/react-server-components/data-fetching")
+              }
               variant="ghost"
               className="w-full justify-start"
             >
@@ -130,7 +132,9 @@ export function Sidebar({ className, playlists }: SidebarProps) {
               Data Fetching
             </Button>
             <Button
-              onClick={() => router.push("/data-fetching/composition-patterns")}
+              onClick={() =>
+                router.push("/react-server-components/composition-patterns")
+              }
               variant="ghost"
               className="w-full justify-start"
             >
