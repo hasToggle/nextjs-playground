@@ -1,28 +1,11 @@
 import "server-only";
 
-import { InfoCircledIcon } from "@radix-ui/react-icons";
-
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Card className="relative border-sky-200">
-      <Badge
-        className="absolute left-3 -top-3 bg-white border-sky-200"
-        variant="outline"
-      >
-        Server Component
-      </Badge>
-      <CardHeader>
-        <CardTitle>Products</CardTitle>
-        <CardDescription>
-          <span className="p-4 h-24 flex border rounded-lg">
+    <>
+      <div className="h-28">
+        <div className="px-4 py-3 my-auto border rounded-lg">
+          <div>
             Products are fetched at request time and streamed to the user. This
             is most useful for content that changes frequently, such as social
             media feeds or real-time data. The initial response is slower with
@@ -37,10 +20,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             dynamic content. The initial response is faster with PPR because
             CDNs are usually closer to the user than your server, and the
             resource does not have to be rebuilt since it&apos;s static anyway. */}
-          </span>
-        </CardDescription>
-      </CardHeader>
+          </div>
+        </div>
+      </div>
+
       {children}
-    </Card>
+    </>
   );
 }

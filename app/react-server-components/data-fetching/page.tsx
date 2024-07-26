@@ -12,6 +12,16 @@ import DataFetchingTabs from "./tabs";
 export default function DataFetching() {
   return (
     <Card>
+      <p className="text-muted-foreground">
+        RSCs are a new way to build React applications. They are a new primitive
+        that enables developers to build applications that are faster by
+        default.
+      </p>
+      <p className="text-muted-foreground">
+        When using the App Router in Next, you are automatically opted into
+        using React Server Components. By default, every component is a Server
+        Component.
+      </p>
       <CardHeader>
         <CardTitle>
           There&apos;s more than one way of fetching data in Next

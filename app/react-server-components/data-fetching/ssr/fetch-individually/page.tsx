@@ -4,7 +4,8 @@ import { CalendarIcon, CodeIcon, ClockIcon } from "@radix-ui/react-icons";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
-import SwitchIndividually from "../switch";
+import { FetchItemsIndividually } from "../../toggles";
+import { Reload } from "../../reload-button";
 import Table from "../../table";
 import DataFetchingTabs from "../../tabs";
 import StreamingOutOfOrder from "./streaming";
@@ -19,6 +20,10 @@ export default function SSRIndividually() {
   const requestTime = new Date().toISOString();
   return (
     <DataFetchingTabs>
+      <div className="flex space-x-1">
+        <Reload />
+        <FetchItemsIndividually />
+      </div>
       <Card className="mb-3 p-4">
         <span className="flex items-center text-base">
           <ClockIcon className="mr-2 h-4 w-4" />
@@ -33,7 +38,6 @@ export default function SSRIndividually() {
           At {requestTime}.
         </span>
       </Card>
-      <SwitchIndividually />
 
       <CardContent>
         <Table>

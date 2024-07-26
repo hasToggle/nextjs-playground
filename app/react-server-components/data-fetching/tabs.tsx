@@ -13,7 +13,7 @@ export default function DataFetchingTabs({
   const pathname = usePathname();
 
   return (
-    <Tabs value={pathname.split("/")[3]} className="space-y-6 p-6 pt-0">
+    <Tabs value={pathname.split("/")[3]} className="space-y-2 py-6 pt-0">
       <div className="space-between flex items-center">
         <TabsList>
           <TabsTrigger
