@@ -61,7 +61,10 @@ export default function ISR() {
         </CardContent>
         <CardFooter className="mt-3">
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-4</strong> of <strong>4</strong> products
+            All items are <strong>static for 30 seconds.</strong> Refreshing the
+            page after that triggers a delay of 3 seconds in the background.
+            Refreshing the page after another 3 seconds fetches the updated
+            list.
           </div>
         </CardFooter>
       </DataFetchingTabs>

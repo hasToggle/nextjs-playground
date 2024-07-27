@@ -63,7 +63,8 @@ export default function SSR() {
         </CardContent>
         <CardFooter className="mt-3">
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-4</strong> of <strong>4</strong> products
+            Fetching all items incurs a deliberate{" "}
+            <strong>3 second delay</strong>.
           </div>
         </CardFooter>
       </DataFetchingTabs>

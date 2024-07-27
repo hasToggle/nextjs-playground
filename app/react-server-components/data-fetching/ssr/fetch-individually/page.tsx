@@ -52,7 +52,8 @@ export default function SSRIndividually() {
         </CardContent>
         <CardFooter className="mt-3">
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-4</strong> of <strong>4</strong> products
+            To better observe how individual items are streaming in, fetching
+            can take <strong>up to 10 seconds</strong>.
           </div>
         </CardFooter>
       </DataFetchingTabs>

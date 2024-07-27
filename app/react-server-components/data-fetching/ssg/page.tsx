@@ -50,7 +50,10 @@ export default function SSG() {
         </CardContent>
         <CardFooter className="mt-3">
           <div className="text-xs text-muted-foreground">
-            Showing <strong>1-4</strong> of <strong>4</strong> products
+            All items remain{" "}
+            <strong>static for the lifetime of a deployment.</strong> The
+            initial delay of 3 seconds happens at build time and is never
+            experienced by the user.
           </div>
         </CardFooter>
       </DataFetchingTabs>
