@@ -16,9 +16,9 @@ export default function TableOfProducts({
           <TableHead>Resolved</TableHead>
           <TableHead className="hidden md:table-cell">Where</TableHead>
           <TableHead className="hidden md:table-cell">When</TableHead>
-          <TableHead>
+          {/* <TableHead>
             <span className="sr-only">Actions</span>
-          </TableHead>
+          </TableHead> */}
         </TableRow>
       </TableHeader>
       {children}

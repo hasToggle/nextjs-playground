@@ -2,6 +2,7 @@
 
 import { use } from "react";
 import { MoreHorizontal } from "lucide-react";
+import { format, formatDistanceToNow } from "date-fns";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,24 +19,22 @@ import { ImageLink, TextLink } from "../links";
 
 export default function ClientComponent({
   /* if some props can't be serialized, why not make the linter scream at us here? => Because you can wrap this component within another client component and pass props then */
-  fetchDetails = {
-    fetchedOn: "",
-    source: "",
-    time: "",
-  },
+  fetchDetails,
   products,
   children,
 }: {
   fetchDetails: {
     fetchedOn: string;
     source: string;
-    time: string;
+    time: Date;
   };
   products: Promise<Array<any>>;
   children?: React.ReactNode;
 }) {
   const prods = use(products);
-  const { fetchedOn, source, time } = fetchDetails;
+  const { fetchedOn, source, time = new Date() } = fetchDetails;
+  const relativeDate = formatDistanceToNow(time, { addSuffix: true });
+  const timeWithSeconds = format(new Date(), "HH:mm:ss");
   return (
     <TableBody>
       {prods.map((product) => (
@@ -62,11 +61,14 @@ export default function ClientComponent({
               {source}
             </Badge>
           </TableCell>
-          <TableCell className="hidden md:table-cell" suppressHydrationWarning>
-            {new Date().toISOString()}
+          <TableCell
+            className="hidden md:table-cell text-sky-700 font-semibold"
+            suppressHydrationWarning
+          >
+            {relativeDate} ({timeWithSeconds})
           </TableCell>
 
-          <TableCell>
+          {/* <TableCell>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button aria-haspopup="true" size="icon" variant="ghost">
@@ -80,7 +82,7 @@ export default function ClientComponent({
                 <DropdownMenuItem>Delete</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </TableCell>
+          </TableCell> */}
         </TableRow>
       ))}
     </TableBody>

@@ -6,11 +6,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="h-28">
         <div className="px-4 py-3 my-auto border rounded-lg">
           <div>
-            Products are fetched at request time and streamed to the user. This
-            is most useful for content that changes frequently, such as social
-            media feeds or real-time data. The initial response is slower with
-            SSR because the server has to fetch the data and build the page
-            before sending it to the user.
+            Products are fetched at request time and streamed to the user. The
+            initial response is slower with SSR because the server has to fetch
+            the data and build the page before sending it to the user. This is
+            most useful for content that changes frequently, such as social
+            media feeds or real-time data.
             {/* <InfoCircledIcon className="mr-2 h-10 w-10" />
             Without PPR, every request goes back to the server in your specified
             region, which rebuilds the static shell and sends back the HTML

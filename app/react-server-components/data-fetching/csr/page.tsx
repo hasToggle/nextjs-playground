@@ -13,7 +13,7 @@ import Table from "../table";
 import Products from "../products";
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
-import SourceInfo from "../source-info";
+import { SourceInfo, Boundary } from "../source-info";
 import { Reload } from "../reload-button";
 
 export default function CSR() {
@@ -21,35 +21,36 @@ export default function CSR() {
    * Strictly speaking, the request for data comes a bit further down in the page component,
    * but for the demo it's convenient to snapshot the moment here.
    */
-  const requestTime = new Date().toISOString();
+  const requestTime = new Date();
 
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
-        <SourceInfo
-          details={{
-            type: "Client Component",
-            init: "Fetch initiated at request time.",
-            env: "In your browser.",
-            requestTime,
-          }}
-        />
+        <Boundary variant="client">
+          <SourceInfo
+            details={{
+              init: "fetch initiated at request time.",
+              env: "in your browser.",
+              requestTime,
+            }}
+          />
+        </Boundary>
 
         <div className="flex space-x-1 mb-5">
           <Reload />
         </div>
 
         <CardContent className="p-0">
-          <div className="relative p-1 rounded-md border border-purple-300">
+          <div className="relative p-1 rounded-md border border-blue-300">
             <Badge
-              className="absolute left-3 -top-3 bg-white border-purple-300"
+              className="absolute left-3 -top-3 bg-white border-blue-300"
               variant="outline"
             >
               Client Component
             </Badge>
 
             <Table>
-              <GoFetch />
+              <GoFetch initiatedAt={requestTime} />
             </Table>
           </div>
         </CardContent>
@@ -63,12 +64,12 @@ export default function CSR() {
   );
 }
 
-function GoFetch() {
+function GoFetch({ initiatedAt: initiated }: { initiatedAt: Date }) {
   const [products, setProducts] = useState<Product[] | []>([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("/api/products");
+      const response = await fetch("/api/products", { cache: "no-store" });
       const { products } = await response.json();
       setProducts(products);
     }
@@ -86,7 +87,7 @@ function GoFetch() {
     <Products
       fetchDetails={{
         fetchedOn: "at request time",
-        time: new Date().toISOString(),
+        time: initiated,
         source: "on the Client",
       }}
       products={products}

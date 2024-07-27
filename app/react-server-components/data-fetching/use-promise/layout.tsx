@@ -15,9 +15,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div>
             That is where the new use-API comes in. Just like an async Server
-            Component, you can suspend a synchronous Client Component while it
-            waits for the Promise to resolve. While the Promise is pending, the
-            Suspense boundary will use the fallback.
+            Component, you can suspend a synchronous Client Component by calling
+            "use" which is going to wait for the Promise to resolve. While the
+            Promise is pending, the Suspense boundary will display the fallback.
           </div>
         </div>
       </div>

@@ -1,10 +1,8 @@
-import { ImageLink, TextLink } from "./links";
-
 import { MoreHorizontal } from "lucide-react";
+import { format, formatDistanceToNow } from "date-fns";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,26 +10,26 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import { TableCell, TableRow, TableBody } from "@/components/ui/table";
+
 import { Product } from "@/lib/data";
 
+import { ImageLink, TextLink } from "./links";
+
 export default function Products({
-  fetchDetails = {
-    fetchedOn: "",
-    source: "",
-    time: new Date().toISOString(),
-  },
+  fetchDetails,
   products = [],
 }: {
   fetchDetails: {
     fetchedOn: string;
     source: string;
-    time: string;
+    time: Date;
   };
   products: Product[];
 }) {
-  const { fetchedOn, source, time } = fetchDetails;
+  const { fetchedOn, source, time = new Date() } = fetchDetails;
+  const relativeDate = formatDistanceToNow(time, { addSuffix: true });
+  const timeWithSeconds = format(new Date(), "HH:mm:ss");
   return (
     <TableBody>
       {products.map((product) => (
@@ -58,10 +56,13 @@ export default function Products({
               {source}
             </Badge>
           </TableCell>
-          <TableCell className="hidden md:table-cell" suppressHydrationWarning>
-            {time}
+          <TableCell
+            className="hidden md:table-cell text-sky-700 font-semibold"
+            suppressHydrationWarning
+          >
+            {relativeDate} ({timeWithSeconds})
           </TableCell>
-          <TableCell>
+          {/* <TableCell>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button aria-haspopup="true" size="icon" variant="ghost">
@@ -75,7 +76,7 @@ export default function Products({
                 <DropdownMenuItem>Delete</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </TableCell>
+          </TableCell> */}
         </TableRow>
       ))}
     </TableBody>

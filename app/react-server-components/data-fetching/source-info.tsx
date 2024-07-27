@@ -1,22 +1,21 @@
 import { CalendarIcon, CodeIcon, ClockIcon } from "@radix-ui/react-icons";
+import clsx from "clsx";
+import { format, formatDistanceToNow } from "date-fns";
 
 import { Badge } from "@/components/ui/badge";
 
-export default function SourceInfo({
+export function SourceInfo({
   details,
 }: {
-  details: { type: string; init: string; env: string; requestTime: string };
+  details: { init: string; env: string; requestTime: Date };
 }) {
-  const { type, init, env, requestTime } = details;
-  return (
-    <div className="relative mt-4 mb-2 px-4 py-5 border border-purple-300 rounded-md">
-      <Badge
-        className="absolute left-3 -top-3 bg-white border-purple-300"
-        variant="outline"
-      >
-        {type}
-      </Badge>
+  const { init, env, requestTime } = details;
 
+  const relativeDate = formatDistanceToNow(requestTime, { addSuffix: true });
+  const timeWithSeconds = format(requestTime, "HH:mm:ss");
+
+  return (
+    <>
       <span className="flex items-center text-base">
         <ClockIcon className="mr-2 h-4 w-4" />
         {init}
@@ -32,8 +31,37 @@ export default function SourceInfo({
         suppressHydrationWarning
       >
         <CalendarIcon className="mr-2 h-4 w-4" />
-        At {requestTime}.
+        {`${relativeDate} (${timeWithSeconds})`}.
       </span>
+    </>
+  );
+}
+
+export function Boundary({
+  variant,
+  children,
+}: {
+  variant: "server" | "client";
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={clsx("relative mt-4 mb-2 px-4 py-5 border rounded-md", {
+        "border-purple-300": variant === "server",
+        "border-blue-300": variant === "client",
+      })}
+    >
+      <Badge
+        className={clsx("absolute capitalize left-3 -top-3 bg-white", {
+          "border-purple-300": variant === "server",
+          "border-blue-300": variant === "client",
+        })}
+        variant="outline"
+      >
+        {variant} Component
+      </Badge>
+
+      {children}
     </div>
   );
 }

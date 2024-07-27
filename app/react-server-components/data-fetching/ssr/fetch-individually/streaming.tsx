@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { MoreHorizontal } from "lucide-react";
+import { format, formatDistanceToNow } from "date-fns";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,19 +18,23 @@ import { ImageLink, TextLink } from "../../links";
 
 import { getProductIds, getProduct } from "@/lib/fake-db";
 
-export default function Products() {
+export default function StreamingOutOfOrder({
+  initiatedAt,
+}: {
+  initiatedAt: Date;
+}) {
   const products = getProductIds();
   return (
     <TableBody>
       {products.map((product) => (
         <Suspense key={product.id} fallback={<EmptyRow />}>
           <Item
-            fetchDetails={{
-              fetchedOn: "On Request",
-              time: "",
-              source: "Server",
-            }}
             id={product.id}
+            fetchDetails={{
+              fetchedOn: "at request time",
+              source: "on the Server",
+              time: initiatedAt,
+            }}
           />
         </Suspense>
       ))}
@@ -38,17 +43,13 @@ export default function Products() {
 }
 
 async function Item({
-  fetchDetails = {
-    fetchedOn: "",
-    source: "",
-    time: "",
-  },
+  fetchDetails,
   id,
 }: {
   fetchDetails: {
     fetchedOn: string;
     source: string;
-    time: string;
+    time: Date;
   };
   id: number;
 }) {
@@ -56,8 +57,9 @@ async function Item({
 
   if (!product) return null;
 
-  const { fetchedOn, source, time } = fetchDetails;
-
+  const { fetchedOn, source, time = new Date() } = fetchDetails;
+  const relativeDate = formatDistanceToNow(time, { addSuffix: true });
+  const timeWithSeconds = format(new Date(), "HH:mm:ss");
   return (
     <TableRow key={product?.id || Math.random().toString(36).substring(2)}>
       <TableCell className="hidden sm:table-cell">
@@ -73,15 +75,21 @@ async function Item({
       </TableCell>
 
       <TableCell>
-        <Badge variant="outline">{fetchedOn}</Badge>
+        <Badge variant="outline" className="-ml-2.5">
+          {fetchedOn}
+        </Badge>
       </TableCell>
 
-      <TableCell className="hidden md:table-cell">{source}</TableCell>
+      <TableCell className="hidden md:table-cell">
+        <Badge variant="outline" className="-ml-2.5">
+          {source}
+        </Badge>
+      </TableCell>
       <TableCell className="hidden md:table-cell text-sky-700 font-semibold">
-        {new Date().toISOString()}
+        {relativeDate} ({timeWithSeconds})
       </TableCell>
 
-      <TableCell>
+      {/* <TableCell>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button aria-haspopup="true" size="icon" variant="ghost">
@@ -95,7 +103,7 @@ async function Item({
             <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </TableCell>
+      </TableCell> */}
     </TableRow>
   );
 }

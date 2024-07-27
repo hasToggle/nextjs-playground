@@ -34,7 +34,7 @@ export default function EmptyRow() {
         <Skeleton className="h-4 w-[180px] rounded-md bg-gray-200" />
       </TableCell>
 
-      <TableCell>
+      {/* <TableCell>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button aria-haspopup="true" size="icon" variant="ghost">
@@ -48,7 +48,7 @@ export default function EmptyRow() {
             <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </TableCell>
+      </TableCell> */}
     </TableRow>
   );
 }

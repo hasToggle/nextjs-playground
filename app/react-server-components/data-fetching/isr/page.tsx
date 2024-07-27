@@ -10,7 +10,7 @@ import Table from "../table";
 import Products from "../products";
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
-import SourceInfo from "../source-info";
+import { SourceInfo, Boundary } from "../source-info";
 import { Reload } from "../reload-button";
 
 import { loader } from "@/lib/fake-db";
@@ -25,18 +25,19 @@ export default function ISR() {
    * Strictly speaking, the request for data comes a bit further down in the page component,
    * but for the demo it's convenient to snapshot the moment here.
    */
-  const requestTime = new Date().toISOString();
+  const requestTime = new Date();
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
-        <SourceInfo
-          details={{
-            type: "Server Component",
-            init: "Fetch initiated at request time.",
-            env: "In your serverless functions environment.",
-            requestTime,
-          }}
-        />
+        <Boundary variant="server">
+          <SourceInfo
+            details={{
+              init: "fetch initiated at request time.",
+              env: "in your serverless functions environment.",
+              requestTime,
+            }}
+          />
+        </Boundary>
 
         <div className="flex space-x-1 mb-5">
           <Reload />
@@ -53,7 +54,7 @@ export default function ISR() {
 
             <Table>
               <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
-                <GoFetch />
+                <GoFetch initiatedAt={requestTime} />
               </Suspense>
             </Table>
           </div>
@@ -68,14 +69,14 @@ export default function ISR() {
   );
 }
 
-async function GoFetch() {
+async function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   /* fake a delay of 3 seconds */
   const products = await loader();
   return (
     <Products
       fetchDetails={{
         fetchedOn: "at request time",
-        time: new Date().toISOString(),
+        time: initiatedAt,
         source: "on the Server",
       }}
       products={products}

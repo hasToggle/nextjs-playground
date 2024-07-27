@@ -59,7 +59,10 @@ export default function DataFetchingTabs({
           </TabsTrigger>
         </TabsList>
       </div>
-      <TabsContent value="ssg" className="border-none p-0 outline-none">
+      <TabsContent
+        value="ssg"
+        className="h-full flex-col border-none p-0 data-[state=active]:flex"
+      >
         {children}
       </TabsContent>
       <TabsContent

@@ -12,7 +12,7 @@ import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
 import { Reload } from "../reload-button";
 import ClientComponent from "./client-use-promise";
-import SourceInfo from "../source-info";
+import { SourceInfo, Boundary } from "../source-info";
 
 export const dynamic = "force-dynamic";
 
@@ -21,18 +21,20 @@ export default function UsePromise() {
    * Strictly speaking, the request for data comes a bit further down in the page component,
    * but for the demo it's convenient to snapshot the moment here.
    */
-  const requestTime = new Date().toISOString();
+  const requestTime = new Date();
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
-        <SourceInfo
-          details={{
-            type: "Server Component",
-            init: "Fetch initiated at request time.",
-            env: "In your serverless functions environment.",
-            requestTime,
-          }}
-        />
+        <Boundary variant="server">
+          <SourceInfo
+            details={{
+              init: "fetch initiated at request time.",
+              env: "in your serverless functions environment.",
+              requestTime,
+            }}
+          />
+        </Boundary>
+
         <div className="flex space-x-1 mb-5">
           <Reload />
           {/* <FetchItemsIndividually /> */}
@@ -48,7 +50,7 @@ export default function UsePromise() {
             </Badge>
 
             <Table>
-              <GoFetch />
+              <GoFetch initiatedAt={requestTime} />
             </Table>
           </div>
         </CardContent>
@@ -62,7 +64,7 @@ export default function UsePromise() {
   );
 }
 
-function GoFetch() {
+function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   const products = getAllProducts();
 
   const skeleton = Array.from({ length: 4 }, (_, index) => (
@@ -74,7 +76,7 @@ function GoFetch() {
       <ClientComponent
         fetchDetails={{
           fetchedOn: "at request time",
-          time: new Date().toISOString(),
+          time: initiatedAt,
           source: "on the Client",
         }}
         products={products}

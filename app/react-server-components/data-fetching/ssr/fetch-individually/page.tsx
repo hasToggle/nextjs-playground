@@ -1,14 +1,14 @@
 import "server-only";
 
-import { CalendarIcon, CodeIcon, ClockIcon } from "@radix-ui/react-icons";
-
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 import { FetchItemsIndividually } from "../../toggles";
 import { Reload } from "../../reload-button";
 import Table from "../../table";
 import DataFetchingTabs from "../../tabs";
 import StreamingOutOfOrder from "./streaming";
+import { SourceInfo, Boundary } from "../../source-info";
 
 export const dynamic = "force-dynamic";
 
@@ -17,38 +17,45 @@ export default function SSRIndividually() {
    * Strictly speaking, the request for data comes a bit further down in the page component,
    * but for the demo it's convenient to snapshot the moment here.
    */
-  const requestTime = new Date().toISOString();
+  const requestTime = new Date();
   return (
-    <DataFetchingTabs>
-      <div className="flex space-x-1">
-        <Reload />
-        <FetchItemsIndividually />
-      </div>
-      <Card className="mb-3 p-4">
-        <span className="flex items-center text-base">
-          <ClockIcon className="mr-2 h-4 w-4" />
-          Fetch initiated at request time.
-        </span>
-        <span className="mt-2 flex items-center text-base">
-          <CodeIcon className="mr-2 h-4 w-4" />
-          In your serverless functions environment.
-        </span>
-        <span className="mt-2 flex items-center text-base">
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          At {requestTime}.
-        </span>
-      </Card>
+    <Card className="mt-6 p-4">
+      <DataFetchingTabs>
+        <Boundary variant="server">
+          <SourceInfo
+            details={{
+              init: "fetch initiated at request time.",
+              env: "in your serverless functions environment.",
+              requestTime,
+            }}
+          />
+        </Boundary>
 
-      <CardContent>
-        <Table>
-          <StreamingOutOfOrder />
-        </Table>
-      </CardContent>
-      <CardFooter>
-        <div className="text-xs text-muted-foreground">
-          Showing <strong>1-10</strong> of <strong>32</strong> products
+        <div className="flex space-x-1 mb-5">
+          <Reload />
+          <FetchItemsIndividually />
         </div>
-      </CardFooter>
-    </DataFetchingTabs>
+
+        <CardContent className="p-0">
+          <div className="relative p-1 rounded-md border border-purple-300">
+            <Badge
+              className="absolute left-3 -top-3 bg-white border-purple-300"
+              variant="outline"
+            >
+              Server Component
+            </Badge>
+
+            <Table>
+              <StreamingOutOfOrder initiatedAt={requestTime} />
+            </Table>
+          </div>
+        </CardContent>
+        <CardFooter className="mt-3">
+          <div className="text-xs text-muted-foreground">
+            Showing <strong>1-4</strong> of <strong>4</strong> products
+          </div>
+        </CardFooter>
+      </DataFetchingTabs>
+    </Card>
   );
 }
