@@ -15,6 +15,7 @@ import { TableCell, TableRow, TableBody } from "@/components/ui/table";
 import { Product } from "@/lib/data";
 
 import { ImageLink, TextLink } from "./links";
+import LocalDistance from "./local-distance-to-now";
 
 export default function Products({
   fetchDetails,
@@ -28,8 +29,14 @@ export default function Products({
   products: Product[];
 }) {
   const { fetchedOn, source, time = new Date() } = fetchDetails;
-  const relativeDate = formatDistanceToNow(time, { addSuffix: true });
-  const timeWithSeconds = format(new Date(), "HH:mm:ss");
+  /* const relativeDate = formatDistanceToNow(time, { addSuffix: true }); */
+  const timeWithSeconds = new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    timeZoneName: "short",
+  }).format(new Date());
   return (
     <TableBody>
       {products.map((product) => (
@@ -60,7 +67,9 @@ export default function Products({
             className="hidden md:table-cell text-sky-700 font-semibold"
             suppressHydrationWarning
           >
-            {relativeDate} ({timeWithSeconds})
+            <span>
+              <LocalDistance requestTime={time} /> ({timeWithSeconds})
+            </span>
           </TableCell>
           {/* <TableCell>
             <DropdownMenu>

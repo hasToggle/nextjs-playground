@@ -16,6 +16,7 @@ import {
 import { TableCell, TableRow, TableBody } from "@/components/ui/table";
 
 import { ImageLink, TextLink } from "../links";
+import LocalDistance from "../local-distance-to-now";
 
 export default function ClientComponent({
   /* if some props can't be serialized, why not make the linter scream at us here? => Because you can wrap this component within another client component and pass props then */
@@ -33,8 +34,14 @@ export default function ClientComponent({
 }) {
   const prods = use(products);
   const { fetchedOn, source, time = new Date() } = fetchDetails;
-  const relativeDate = formatDistanceToNow(time, { addSuffix: true });
-  const timeWithSeconds = format(new Date(), "HH:mm:ss");
+  /* const relativeDate = formatDistanceToNow(time, { addSuffix: true }); */
+  const timeWithSeconds = new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    timeZoneName: "short",
+  }).format(new Date());
   return (
     <TableBody>
       {prods.map((product) => (
@@ -65,7 +72,9 @@ export default function ClientComponent({
             className="hidden md:table-cell text-sky-700 font-semibold"
             suppressHydrationWarning
           >
-            {relativeDate} ({timeWithSeconds})
+            <span>
+              <LocalDistance requestTime={time} /> ({timeWithSeconds})
+            </span>
           </TableCell>
 
           {/* <TableCell>
