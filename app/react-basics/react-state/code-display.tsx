@@ -1,68 +1,53 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { createHighlighter } from "shiki";
+import { useState, useEffect, use } from "react";
 import { SkeletonCode } from "./skeleton-code";
 
 export const CodeDisplay = ({
   code,
+  pendingHighlighter,
   onAnimationComplete,
 }: {
   code: string[];
+  pendingHighlighter: Promise<any>;
   onAnimationComplete: () => void;
 }) => {
+  const highlighter = use(pendingHighlighter);
   const [highlightedCode, setHighlightedCode] = useState<string>("");
   const [currentLine, setCurrentLine] = useState<number>(0);
-  const [highlighter, setHighlighter] = useState<any>(null);
   const codeline = code[currentLine];
 
   useEffect(() => {
-    async function runHighlighter() {
-      setHighlighter(
-        await createHighlighter({
-          themes: ["ayu-dark"],
-          langs: ["jsx"],
-        })
-      );
-    }
-    runHighlighter();
-  }, []);
+    const highlighted = highlighter.codeToHtml(codeline, {
+      lang: "jsx",
+      theme: "ayu-dark",
+    });
+
+    const lines = highlighted.split("\n");
+    const highlightedLines = lines
+      .map((line: string, index: number) => {
+        if (index === currentLine) {
+          return `<span class="highlighted-line">${line}</span>`;
+        }
+        return line;
+      })
+      .join("\n");
+
+    setHighlightedCode(highlightedLines);
+  }, [codeline, currentLine]);
 
   useEffect(() => {
-    if (highlighter) {
-      const highlighted = highlighter.codeToHtml(code[currentLine], {
-        lang: "jsx",
-        theme: "ayu-dark",
-      });
-
-      const lines = highlighted.split("\n");
-      const highlightedLines = lines
-        .map((line: string, index: number) => {
-          if (index === currentLine) {
-            return `<span class="highlighted-line">${line}</span>`;
-          }
-          return line;
-        })
-        .join("\n");
-
-      setHighlightedCode(highlightedLines);
+    let interval: NodeJS.Timeout | undefined;
+    const totalLines = codeline.split("\n").length - 1;
+    if (currentLine < totalLines) {
+      interval = setInterval(() => {
+        setCurrentLine((prevLine) => prevLine + 1);
+      }, 300);
+    } else {
+      onAnimationComplete();
     }
-  }, [code, highlighter, currentLine]);
-
-  useEffect(() => {
-    if (highlighter) {
-      let interval: NodeJS.Timeout | undefined;
-      const totalLines = codeline.split("\n").length - 1;
-      if (currentLine < totalLines) {
-        interval = setInterval(() => {
-          setCurrentLine((prevLine) => prevLine + 1);
-        }, 300);
-      } else {
-        onAnimationComplete();
-      }
-      return () => clearInterval(interval);
-    }
-  }, [code, codeline, highlighter, currentLine, onAnimationComplete]);
+    return () => clearInterval(interval);
+  }, [codeline, currentLine, onAnimationComplete]);
 
   if (!highlightedCode) {
     return <SkeletonCode />;

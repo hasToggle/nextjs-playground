@@ -7,6 +7,8 @@ import { Boundary } from "@/components/ui/boundary";
 import Button from "./button";
 import { CodeDisplay } from "./code-display";
 
+import { initHighlighter } from "@/lib/shiki-init";
+
 type State = {
   count: number;
   internalCount: number;
@@ -67,6 +69,8 @@ export function Counter() {
   const [componentToShow, setComponentToShow] = useState<
     "codeDisplay" | "buttonDisplay"
   >("buttonDisplay");
+
+  const pendingHighlighter = initHighlighter();
 
   const handleAnimationComplete = useCallback(() => {
     setComponentToShow("buttonDisplay");
@@ -201,6 +205,7 @@ function Counter() {
                       codeSnippet_2,
                       codeSnippet_2,
                     ]}
+                    pendingHighlighter={pendingHighlighter}
                     onAnimationComplete={handleAnimationComplete}
                   />
                 </motion.div>
