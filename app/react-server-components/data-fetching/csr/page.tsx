@@ -26,7 +26,7 @@ export default function CSR() {
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
-        <Boundary variant="client">
+        <Boundary variant="client" label="Client Component">
           <SourceInfo
             details={{
               init: "fetch initiated at request time.",

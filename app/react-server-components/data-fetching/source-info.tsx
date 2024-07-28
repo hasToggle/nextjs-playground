@@ -46,9 +46,11 @@ export function SourceInfo({
 
 export function Boundary({
   variant,
+  label,
   children,
 }: {
   variant: "server" | "client";
+  label: string;
   children: React.ReactNode;
 }) {
   return (
@@ -59,13 +61,13 @@ export function Boundary({
       })}
     >
       <Badge
-        className={clsx("absolute capitalize left-3 -top-3 bg-white", {
+        className={clsx("absolute left-3 -top-3 bg-white", {
           "border-purple-300": variant === "server",
           "border-blue-300": variant === "client",
         })}
         variant="outline"
       >
-        {variant} Component
+        {label}
       </Badge>
 
       {children}

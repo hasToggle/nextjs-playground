@@ -21,7 +21,7 @@ export default function SSRIndividually() {
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
-        <Boundary variant="server">
+        <Boundary variant="server" label="Server Component">
           <SourceInfo
             details={{
               init: "fetch initiated at request time.",

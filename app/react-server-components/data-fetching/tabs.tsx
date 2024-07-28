@@ -7,13 +7,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function DataFetchingTabs({
   children,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   const router = useRouter();
   const pathname = usePathname();
 
   return (
-    <Tabs value={pathname.split("/")[3]} className="space-y-2 py-6 pt-0">
+    <Tabs
+      value={pathname.split("/")[3] || "default"}
+      className="space-y-2 py-6 pt-0"
+    >
       <div className="space-between flex items-center">
         <TabsList>
           <TabsTrigger
@@ -59,6 +62,12 @@ export default function DataFetchingTabs({
           </TabsTrigger>
         </TabsList>
       </div>
+      <TabsContent
+        value="default"
+        className="h-full flex-col border-none p-0 data-[state=active]:flex"
+      >
+        {children}
+      </TabsContent>
       <TabsContent
         value="ssg"
         className="h-full flex-col border-none p-0 data-[state=active]:flex"

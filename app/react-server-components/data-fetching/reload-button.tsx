@@ -4,7 +4,7 @@ import { RefreshCcw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-export function Reload() {
+export function Reload({ disabled = false }: { disabled?: boolean }) {
   return (
     <div className="flex items-center space-x-2">
       <Button
@@ -14,6 +14,7 @@ export function Reload() {
         onClick={() => {
           window?.location.reload();
         }}
+        disabled={disabled}
       >
         <RefreshCcw className="mr-2 h-4 w-4" />
         Reload
