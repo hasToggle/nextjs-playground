@@ -7,12 +7,12 @@ import { Toggle } from "@/components/ui/toggle";
 
 export function FetchItemsIndividually() {
   const router = useRouter();
-  const isPressed = usePathname().includes("fetch-individually");
+  const isPressed = usePathname().includes("fetch-items-in-parallel");
 
   const handleOnChange = (pressed: boolean) => {
     if (pressed) {
       router.push(
-        "/react-server-components/data-fetching/ssr/fetch-individually"
+        "/react-server-components/data-fetching/ssr/fetch-items-in-parallel"
       );
     } else {
       router.push("/react-server-components/data-fetching/ssr");
@@ -30,7 +30,7 @@ export function FetchItemsIndividually() {
       >
         {!isPressed && <Check className="mr-2 h-4 w-4" />}
         {isPressed && <CheckCheck className="mr-2 h-4 w-4" />}
-        Fetch items individually
+        Fetch items in parallel
       </Toggle>
     </div>
   );

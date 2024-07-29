@@ -13,6 +13,7 @@ import {
 import { TableCell, TableRow, TableBody } from "@/components/ui/table";
 
 import { Product } from "@/lib/data";
+import { createNumberDispenser } from "@/lib/data";
 
 import { ImageLink, TextLink } from "./links";
 import LocalDistance from "./local-distance-to-now";
@@ -29,7 +30,6 @@ export default function Products({
   products: Product[];
 }) {
   const { fetchedOn, source, time = new Date() } = fetchDetails;
-  /* const relativeDate = formatDistanceToNow(time, { addSuffix: true }); */
   const timeWithSeconds = new Intl.DateTimeFormat("en-US", {
     hour: "2-digit",
     minute: "2-digit",
@@ -37,6 +37,9 @@ export default function Products({
     hour12: false,
     timeZoneName: "short",
   }).format(new Date());
+
+  const getOrder = createNumberDispenser();
+
   return (
     <TableBody>
       {products.map((product) => (
@@ -44,8 +47,8 @@ export default function Products({
           <TableCell className="hidden sm:table-cell">
             <ImageLink
               id={product.id}
-              alt={product.imageAlt}
-              src={product.imageSrc}
+              alt="Indicates the order in which the items have been rendered."
+              src={getOrder()}
             />
           </TableCell>
 

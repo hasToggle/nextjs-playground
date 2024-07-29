@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { TableCell, TableRow, TableBody } from "@/components/ui/table";
 
+import { createNumberDispenser } from "@/lib/data";
+
 import { ImageLink, TextLink } from "../links";
 import LocalDistance from "../local-distance-to-now";
 
@@ -33,8 +35,8 @@ export default function ClientComponent({
   children?: React.ReactNode;
 }) {
   const prods = use(products);
+
   const { fetchedOn, source, time = new Date() } = fetchDetails;
-  /* const relativeDate = formatDistanceToNow(time, { addSuffix: true }); */
   const timeWithSeconds = new Intl.DateTimeFormat("en-US", {
     hour: "2-digit",
     minute: "2-digit",
@@ -42,6 +44,9 @@ export default function ClientComponent({
     hour12: false,
     timeZoneName: "short",
   }).format(new Date());
+
+  const getOrder = createNumberDispenser();
+
   return (
     <TableBody>
       {prods.map((product) => (
@@ -49,8 +54,8 @@ export default function ClientComponent({
           <TableCell className="hidden sm:table-cell">
             <ImageLink
               id={product.id}
-              alt={product.imageAlt}
-              src={product.imageSrc}
+              alt="Indicates the order in which the items have been rendered."
+              src={getOrder()}
             />
           </TableCell>
 

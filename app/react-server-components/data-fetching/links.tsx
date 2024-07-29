@@ -19,10 +19,10 @@ export function ImageLink({
     <Link href={`/data-fetching/${segment}/${id}`}>
       <Image
         alt={alt}
-        className="aspect-square rounded-md object-cover"
-        height="64"
+        className="rounded-md aspect-square mx-auto"
+        height="40"
         src={src}
-        width="64"
+        width="40"
       />
     </Link>
   );
