@@ -34,7 +34,7 @@ export const CodeDisplay = ({
       .join("\n");
 
     setHighlightedCode(highlightedLines);
-  }, [codeline, currentLine]);
+  }, [highlighter, codeline, currentLine]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined;
