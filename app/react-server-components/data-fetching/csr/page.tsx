@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 import { TableBody } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Boundary } from "@/components/ui/boundary";
 
 import { type Product } from "@/lib/data";
 
@@ -13,7 +14,7 @@ import Table from "../table";
 import Products from "../products";
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
-import { SourceInfo, Boundary } from "../source-info";
+import { SourceInfo } from "../source-info";
 import { Reload } from "../reload-button";
 
 export default function CSR() {
@@ -26,7 +27,12 @@ export default function CSR() {
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
-        <Boundary variant="client" label="Client Component">
+        <Boundary
+          labels={["Client Component"]}
+          color="blue"
+          animateRerendering={true}
+          size="small"
+        >
           <SourceInfo
             details={{
               init: "fetch initiated at request time.",
@@ -36,23 +42,21 @@ export default function CSR() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mb-5">
+        <div className="flex space-x-1 mt-3 mb-5">
           <Reload />
         </div>
 
         <CardContent className="p-0">
-          <div className="relative p-1 rounded-md border border-blue-300">
-            <Badge
-              className="absolute left-3 -top-3 bg-white border-blue-300"
-              variant="outline"
-            >
-              Client Component
-            </Badge>
-
+          <Boundary
+            labels={["Client Component"]}
+            color="blue"
+            animateRerendering={true}
+            size="small"
+          >
             <Table>
               <GoFetch initiatedAt={requestTime} />
             </Table>
-          </div>
+          </Boundary>
         </CardContent>
         <CardFooter className="mt-3">
           <div className="text-xs text-muted-foreground">

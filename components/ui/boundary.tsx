@@ -12,7 +12,7 @@ const Label = ({
 }) => {
   return (
     <div
-      className={clsx("rounded-full py-1.5 px-4 shadow-[0_0_1px_2px_black]", {
+      className={clsx("rounded-full py-1 px-4 shadow-[0_0_1px_2px_black]", {
         "bg-gray-800 text-gray-300": color === "default",
         "bg-hastoggle-pink text-pink-50": color === "pink",
         "bg-hastoggle-blue text-white": color === "blue",
@@ -50,13 +50,12 @@ export const Boundary = ({
         "border-hastoggle-cyan": color === "cyan",
         "border-hastoggle-violet": color === "violet",
         "border-hastoggle-orange": color === "orange",
-        "animate-[rerender_1s_ease-in-out_1] text-hastoggle-pink":
-          animateRerendering,
+        "animate-[rerender_1s_ease-in-out_1]": animateRerendering,
       })}
     >
       <div
         className={clsx(
-          "absolute -top-2.5 flex space-x-1 text-[9px] uppercase leading-4 tracking-widest",
+          "absolute -top-3 flex space-x-1 text-[9px] uppercase leading-4 tracking-widest",
           {
             "left-5": size === "small",
             "left-7": size === "default",

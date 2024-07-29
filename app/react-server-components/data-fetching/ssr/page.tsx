@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { TableBody } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+import { Boundary } from "@/components/ui/boundary";
 
 import { FetchItemsIndividually } from "../toggles";
 import { Reload } from "../reload-button";
@@ -12,7 +12,7 @@ import Table from "../table";
 import Products from "../products";
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
-import { SourceInfo, Boundary } from "../source-info";
+import { SourceInfo } from "../source-info";
 
 import { loader } from "@/lib/fake-db";
 
@@ -30,7 +30,12 @@ export default function SSR() {
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
-        <Boundary variant="server" label="Server Component">
+        <Boundary
+          labels={["Server Component"]}
+          color="violet"
+          animateRerendering={true}
+          size="small"
+        >
           <SourceInfo
             details={{
               init: "fetch initiated at request time.",
@@ -40,26 +45,24 @@ export default function SSR() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mb-5">
+        <div className="flex space-x-1 mt-3 mb-5">
           <Reload />
           <FetchItemsIndividually />
         </div>
 
         <CardContent className="p-0">
-          <div className="relative p-1 rounded-md border border-purple-300">
-            <Badge
-              className="absolute left-3 -top-3 bg-white border-purple-300"
-              variant="outline"
-            >
-              Server Component
-            </Badge>
-
+          <Boundary
+            labels={["Server Component"]}
+            color="violet"
+            animateRerendering={true}
+            size="small"
+          >
             <Table>
               <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
                 <GoFetch initiatedAt={requestTime} />
               </Suspense>
             </Table>
-          </div>
+          </Boundary>
         </CardContent>
         <CardFooter className="mt-3">
           <div className="text-xs text-muted-foreground">
