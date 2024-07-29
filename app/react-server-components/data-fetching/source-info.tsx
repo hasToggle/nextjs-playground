@@ -31,12 +31,9 @@ export function SourceInfo({
         {env}
       </div>
 
-      <div
-        className="mt-2 flex items-center text-base"
-        suppressHydrationWarning
-      >
+      <div className="mt-2 flex items-center text-base">
         <CalendarIcon className="mr-2 h-4 w-4" />
-        <span>
+        <span suppressHydrationWarning>
           <LocalDistance requestTime={requestTime} /> ({timeWithSeconds}).
         </span>
       </div>

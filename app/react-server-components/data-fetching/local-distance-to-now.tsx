@@ -9,6 +9,15 @@ export default function LocalDistance({ requestTime }: { requestTime: Date }) {
   );
 
   useEffect(() => {
+    setRelativeDate(
+      formatDistanceToNow(requestTime, {
+        includeSeconds: true,
+        addSuffix: true,
+      })
+    );
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setRelativeDate(
         formatDistanceToNow(requestTime, {
@@ -21,5 +30,5 @@ export default function LocalDistance({ requestTime }: { requestTime: Date }) {
     return () => clearInterval(interval);
   }, [requestTime]);
 
-  return <span suppressHydrationWarning>{relativeDate}</span>;
+  return <span>{relativeDate}</span>;
 }
