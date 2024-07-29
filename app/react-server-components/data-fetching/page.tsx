@@ -17,18 +17,10 @@ export default function DataFetching() {
       <div className="h-28">
         <div className="px-4 py-3 my-auto border rounded-lg">
           <p className="text-muted-foreground">
-            RSCs are a new way to build React applications. They are a new
-            primitive that enables developers to build applications that are
-            faster by default.
-          </p>
-          <p className="text-muted-foreground">
-            When using the App Router in Next, you are automatically opted into
-            using React Server Components.
-          </p>
-          <p>There&apos;s more than one way of fetching data in Next</p>
-          <p>
-            Fetching data is a spectrum. It spans from the server to the client
-            and everything in between.
+            RSCs are a new primitive that enables developers to build
+            applications that are faster by default. This demo is using the App
+            Router in Next, which automatically opts into using React Server
+            Components.
           </p>
         </div>
       </div>
