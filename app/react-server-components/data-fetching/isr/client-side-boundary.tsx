@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { getTime } from "date-fns";
+import { useState, useEffect } from "react";
+
+import useLocalStorage from "use-local-storage";
 
 import { Boundary } from "@/components/ui/boundary";
 
@@ -12,32 +13,24 @@ export default function ClientSideBoundary({
   requestTime: Date;
   children: React.ReactNode;
 }) {
-  /* const [isRegenerated, setIsRegenerated] = useState<boolean>(false);
-  const firstTimeExceeded = useRef<boolean>(false);
-
-  const serverTime = getTime(requestTime);
-  const clientTime = getTime(new Date());
-  const didExceed = clientTime - serverTime > 33200;
+  const [isRegenerated, setIsRegenerated] = useState<boolean>(false);
+  const [storedTime, setStoredTime] = useLocalStorage<string>(
+    "isr",
+    requestTime.toString()
+  );
 
   useEffect(() => {
-    if (didExceed) {
-      if (firstTimeExceeded.current) {
-        setIsRegenerated(true);
-        firstTimeExceeded.current = false;
-      } else {
-        firstTimeExceeded.current = true;
-      }
-    } else {
-      setIsRegenerated(false);
-      firstTimeExceeded.current = false;
+    if (requestTime.toString() != storedTime) {
+      setStoredTime(requestTime.toString());
+      setIsRegenerated(true);
     }
-  }, [didExceed]); */
+  }, [requestTime, isRegenerated, storedTime, setStoredTime]);
 
   return (
     <Boundary
       labels={["Server Component"]}
       color="violet"
-      animateRerendering={true}
+      animateRerendering={isRegenerated}
       size="small"
     >
       {children}
