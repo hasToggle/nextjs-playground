@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
-import { TableBody } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { Boundary } from "@/components/ui/boundary";
 
 import { type Product } from "@/lib/data";
 
-import Table from "../table";
-import Products from "../products";
+import { createNumberDispenser } from "@/lib/utils";
+
+import { ProductsTable, Row } from "../table";
+
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
 import { SourceInfo } from "../source-info";
@@ -42,7 +42,7 @@ export default function CSR() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mt-3 mb-5">
+        <div className="flex space-x-1 mt-3 mb-6">
           <Reload />
         </div>
 
@@ -53,9 +53,9 @@ export default function CSR() {
             animateRerendering={true}
             size="small"
           >
-            <Table>
+            <ProductsTable>
               <GoFetch initiatedAt={requestTime} />
-            </Table>
+            </ProductsTable>
           </Boundary>
         </CardContent>
         <CardFooter className="mt-3">
@@ -70,7 +70,7 @@ export default function CSR() {
 }
 
 function GoFetch({ initiatedAt: initiated }: { initiatedAt: Date }) {
-  const [products, setProducts] = useState<Product[] | []>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -85,17 +85,26 @@ function GoFetch({ initiatedAt: initiated }: { initiatedAt: Date }) {
     const skeleton = Array.from({ length: 4 }, (_, index) => (
       <EmptyRow key={index} />
     ));
-    return <TableBody>{skeleton}</TableBody>;
+    return <>{skeleton}</>;
   }
 
+  /* get order in which the individual items eventually render */
+  const getOrder = createNumberDispenser();
+
   return (
-    <Products
-      fetchDetails={{
-        fetchedOn: "at request time",
-        time: initiated,
-        source: "on the Client",
-      }}
-      products={products}
-    />
+    <>
+      {products.map((product) => (
+        <Row
+          key={product.id}
+          order={getOrder()}
+          fetchDetails={{
+            fetchedOn: "at request time",
+            time: initiated,
+            source: "on the Client",
+          }}
+          product={product}
+        />
+      ))}
+    </>
   );
 }

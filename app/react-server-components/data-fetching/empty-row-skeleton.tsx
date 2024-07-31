@@ -15,7 +15,7 @@ export default function EmptyRow() {
   return (
     <TableRow key={Math.random().toString(36).substring(2)}>
       <TableCell className="hidden sm:table-cell">
-        <Skeleton className="h-[64px] w-[64px] rounded-md bg-gray-200" />
+        <Skeleton className="h-[40px] w-[40px] rounded-md bg-gray-200" />
       </TableCell>
 
       <TableCell className="font-medium">

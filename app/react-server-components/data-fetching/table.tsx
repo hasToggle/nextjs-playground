@@ -1,10 +1,20 @@
-import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableHead,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
-export default function TableOfProducts({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import { Product } from "@/lib/data";
+
+import { CurrentPathLink } from "./links";
+import LocalDistance from "./local-distance-to-now";
+import Number from "./image-at-position";
+
+export function ProductsTable({ children }: { children: React.ReactNode }) {
   return (
     <Table>
       <TableHeader>
@@ -21,7 +31,78 @@ export default function TableOfProducts({
           </TableHead> */}
         </TableRow>
       </TableHeader>
-      {children}
+      <TableBody>{children}</TableBody>
     </Table>
+  );
+}
+
+export function Row({
+  product,
+  order = 0,
+  fetchDetails,
+}: {
+  product: Product;
+  order: number;
+  fetchDetails: {
+    fetchedOn: string;
+    source: string;
+    time: Date;
+  };
+}) {
+  const { fetchedOn, source, time = new Date() } = fetchDetails;
+  const timeWithSeconds = new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    timeZoneName: "short",
+  }).format(time);
+
+  return (
+    <TableRow>
+      <TableCell className="hidden sm:table-cell">
+        <CurrentPathLink id={product.id}>
+          <Number value={order} />
+        </CurrentPathLink>
+      </TableCell>
+
+      <TableCell className="font-medium">
+        <CurrentPathLink id={product.id}>{product.name} </CurrentPathLink>
+      </TableCell>
+
+      <TableCell>
+        <Badge variant="outline" className="-ml-2.5">
+          {fetchedOn}
+        </Badge>
+      </TableCell>
+      <TableCell className="hidden md:table-cell">
+        <Badge variant="outline" className="-ml-2.5">
+          {source}
+        </Badge>
+      </TableCell>
+      <TableCell
+        className="hidden md:table-cell text-stone-700 font-semibold"
+        suppressHydrationWarning
+      >
+        <span>
+          <LocalDistance requestTime={time} /> ({timeWithSeconds})
+        </span>
+      </TableCell>
+      {/* <TableCell>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button aria-haspopup="true" size="icon" variant="ghost">
+        <MoreHorizontal className="h-4 w-4" />
+        <span className="sr-only">Toggle menu</span>
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end">
+      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+      <DropdownMenuItem>Edit</DropdownMenuItem>
+      <DropdownMenuItem>Delete</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</TableCell> */}
+    </TableRow>
   );
 }

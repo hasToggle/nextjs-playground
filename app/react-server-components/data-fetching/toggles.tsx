@@ -5,7 +5,7 @@ import { Check, CheckCheck } from "lucide-react";
 
 import { Toggle } from "@/components/ui/toggle";
 
-export function FetchItemsIndividually() {
+export function FetchItemsInParallel() {
   const router = useRouter();
   const isPressed = usePathname().includes("fetch-items-in-parallel");
 

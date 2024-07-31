@@ -1,18 +1,23 @@
 import "server-only";
 
+import { Suspense } from "react";
+
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Boundary } from "@/components/ui/boundary";
 
-import { FetchItemsIndividually } from "../../toggles";
+import { FetchItemsInParallel } from "../../toggles";
 import { Reload } from "../../reload-button";
-import Table from "../../table";
 import DataFetchingTabs from "../../tabs";
-import StreamingOutOfOrder from "./streaming";
 import { SourceInfo } from "../../source-info";
+import { ProductsTable, Row } from "../../table";
+import EmptyRow from "../../empty-row-skeleton";
+
+import { getProductIds, getProduct } from "@/lib/fake-db";
+import { createNumberDispenser } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
-export default function SSRIndividually() {
+export default function SSRInParallel() {
   /*
    * Strictly speaking, the request for data comes a bit further down in the page component,
    * but for the demo it's convenient to snapshot the moment here.
@@ -36,9 +41,9 @@ export default function SSRIndividually() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mt-3 mb-5">
+        <div className="flex space-x-1 mt-3 mb-6">
           <Reload />
-          <FetchItemsIndividually />
+          <FetchItemsInParallel />
         </div>
 
         <CardContent className="p-0">
@@ -48,9 +53,9 @@ export default function SSRIndividually() {
             animateRerendering={true}
             size="small"
           >
-            <Table>
-              <StreamingOutOfOrder initiatedAt={requestTime} />
-            </Table>
+            <ProductsTable>
+              <GoFetch initiatedAt={requestTime} />
+            </ProductsTable>
           </Boundary>
         </CardContent>
         <CardFooter className="mt-3">
@@ -62,4 +67,49 @@ export default function SSRIndividually() {
       </DataFetchingTabs>
     </Card>
   );
+}
+
+function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
+  const products = getProductIds();
+  const getOrder = createNumberDispenser();
+
+  return (
+    <>
+      {products.map((product) => (
+        <Suspense key={product.id} fallback={<EmptyRow />}>
+          <Item
+            id={product.id}
+            onResolved={getOrder}
+            fetchDetails={{
+              fetchedOn: "at request time",
+              source: "on the Server",
+              time: initiatedAt,
+            }}
+          />
+        </Suspense>
+      ))}
+    </>
+  );
+}
+
+async function Item({
+  id,
+  onResolved,
+  fetchDetails,
+}: {
+  id: number;
+  onResolved: () => number;
+  fetchDetails: {
+    fetchedOn: string;
+    source: string;
+    time: Date;
+  };
+}) {
+  const product = await getProduct(id);
+
+  if (!product) return null;
+
+  const order = onResolved();
+
+  return <Row product={product} order={order} fetchDetails={fetchDetails} />;
 }

@@ -7,7 +7,7 @@ import { Boundary } from "@/components/ui/boundary";
 import Button from "./button";
 import { CodeDisplay } from "./code-display";
 
-import { initHighlighter } from "@/lib/shiki-init";
+import { initHighlighter } from "@/lib/utils";
 
 type State = {
   count: number;

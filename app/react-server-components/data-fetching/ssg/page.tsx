@@ -1,16 +1,15 @@
 import "server-only";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Boundary } from "@/components/ui/boundary";
 
-import Table from "../table";
-import Products from "../products";
 import DataFetchingTabs from "../tabs";
 import { SourceInfo } from "../source-info";
 import { Reload } from "../reload-button";
+import { ProductsTable, Row } from "../table";
 
 import { loader } from "@/lib/fake-db";
+import { createNumberDispenser } from "@/lib/utils";
 
 export default function SSG() {
   /*
@@ -36,7 +35,7 @@ export default function SSG() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mt-3 mb-5">
+        <div className="flex space-x-1 mt-3 mb-6">
           <Reload />
         </div>
 
@@ -47,9 +46,9 @@ export default function SSG() {
             animateRerendering={false}
             size="small"
           >
-            <Table>
+            <ProductsTable>
               <GoFetch initiatedAt={requestTime} />
-            </Table>
+            </ProductsTable>
           </Boundary>
         </CardContent>
         <CardFooter className="mt-3">
@@ -68,14 +67,22 @@ export default function SSG() {
 async function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   /* fake a delay of 3 seconds */
   const products = await loader();
+  /* get order in which the individual items eventually render */
+  const getOrder = createNumberDispenser();
   return (
-    <Products
-      fetchDetails={{
-        fetchedOn: "at build time",
-        time: initiatedAt,
-        source: "on the Server",
-      }}
-      products={products}
-    />
+    <>
+      {products.map((product) => (
+        <Row
+          key={product.id}
+          product={product}
+          order={getOrder()}
+          fetchDetails={{
+            fetchedOn: "at build time",
+            time: initiatedAt,
+            source: "on the Server",
+          }}
+        />
+      ))}
+    </>
   );
 }

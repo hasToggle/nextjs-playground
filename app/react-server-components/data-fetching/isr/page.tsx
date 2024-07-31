@@ -3,17 +3,16 @@ import "server-only";
 import { Suspense } from "react";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { TableBody } from "@/components/ui/table";
 import ClientSideBoundary from "./client-side-boundary";
 
-import Table from "../table";
-import Products from "../products";
+import { ProductsTable, Row } from "../table";
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
 import { SourceInfo } from "../source-info";
 import { Reload } from "../reload-button";
 
 import { loader } from "@/lib/fake-db";
+import { createNumberDispenser } from "@/lib/utils";
 
 export const revalidate = 30;
 
@@ -39,17 +38,17 @@ export default function ISR() {
           />
         </ClientSideBoundary>
 
-        <div className="flex space-x-1 mt-3 mb-5">
+        <div className="flex space-x-1 mt-3 mb-6">
           <Reload />
         </div>
 
         <CardContent className="p-0">
           <ClientSideBoundary requestTime={requestTime}>
-            <Table>
-              <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
+            <ProductsTable>
+              <Suspense fallback={<>{skeleton}</>}>
                 <GoFetch initiatedAt={requestTime} />
               </Suspense>
-            </Table>
+            </ProductsTable>
           </ClientSideBoundary>
         </CardContent>
         <CardFooter className="mt-3">
@@ -68,14 +67,22 @@ export default function ISR() {
 async function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   /* fake a delay of 3 seconds */
   const products = await loader();
+  /* get order in which the individual items eventually render */
+  const getOrder = createNumberDispenser();
   return (
-    <Products
-      fetchDetails={{
-        fetchedOn: "at request time",
-        time: initiatedAt,
-        source: "on the Server",
-      }}
-      products={products}
-    />
+    <>
+      {products.map((product) => (
+        <Row
+          key={product.id}
+          order={getOrder()}
+          fetchDetails={{
+            fetchedOn: "at request time",
+            time: initiatedAt,
+            source: "on the Server",
+          }}
+          product={product}
+        />
+      ))}
+    </>
   );
 }

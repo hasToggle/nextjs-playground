@@ -3,13 +3,12 @@ import "server-only";
 import { Suspense } from "react";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { TableBody } from "@/components/ui/table";
+
 import { Boundary } from "@/components/ui/boundary";
 
 import { getAllProducts } from "@/lib/fake-db";
 
-import Table from "../table";
+import { ProductsTable } from "../table";
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
 import { Reload } from "../reload-button";
@@ -42,7 +41,7 @@ export default function UsePromise() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mt-3 mb-5">
+        <div className="flex space-x-1 mt-3 mb-6">
           <Reload />
           {/* <FetchItemsIndividually /> */}
         </div>
@@ -54,9 +53,9 @@ export default function UsePromise() {
             animateRerendering={true}
             size="small"
           >
-            <Table>
+            <ProductsTable>
               <GoFetch initiatedAt={requestTime} />
-            </Table>
+            </ProductsTable>
           </Boundary>
         </CardContent>
         <CardFooter className="mt-3">
@@ -78,7 +77,7 @@ function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   ));
 
   return (
-    <Suspense fallback={<TableBody>{skeleton}</TableBody>}>
+    <Suspense fallback={<>{skeleton}</>}>
       <ClientComponent
         fetchDetails={{
           fetchedOn: "at request time",

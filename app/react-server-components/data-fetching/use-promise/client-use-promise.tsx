@@ -1,30 +1,15 @@
 "use client";
 
 import { use } from "react";
-import { MoreHorizontal } from "lucide-react";
-import { format, formatDistanceToNow } from "date-fns";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { TableCell, TableRow, TableBody } from "@/components/ui/table";
+import { Row } from "../table";
 
-import { createNumberDispenser } from "@/lib/data";
-
-import { ImageLink, TextLink } from "../links";
-import LocalDistance from "../local-distance-to-now";
+import { createNumberDispenser } from "@/lib/utils";
 
 export default function ClientComponent({
   /* if some props can't be serialized, why not make the linter scream at us here? => Because you can wrap this component within another client component and pass props then */
   fetchDetails,
   products,
-  children,
 }: {
   fetchDetails: {
     fetchedOn: string;
@@ -32,73 +17,20 @@ export default function ClientComponent({
     time: Date;
   };
   products: Promise<Array<any>>;
-  children?: React.ReactNode;
 }) {
   const prods = use(products);
-
-  const { fetchedOn, source, time = new Date() } = fetchDetails;
-  const timeWithSeconds = new Intl.DateTimeFormat("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-    timeZoneName: "short",
-  }).format(new Date());
-
   const getOrder = createNumberDispenser();
 
   return (
-    <TableBody>
+    <>
       {prods.map((product) => (
-        <TableRow key={product.id}>
-          <TableCell className="hidden sm:table-cell">
-            <ImageLink
-              id={product.id}
-              alt="Indicates the order in which the items have been rendered."
-              src={getOrder()}
-            />
-          </TableCell>
-
-          <TableCell className="font-medium">
-            <TextLink id={product.id} name={product.name} />
-          </TableCell>
-
-          <TableCell>
-            <Badge variant="outline" className="-ml-2.5">
-              {fetchedOn}
-            </Badge>
-          </TableCell>
-          <TableCell className="hidden md:table-cell">
-            <Badge variant="outline" className="-ml-2.5">
-              {source}
-            </Badge>
-          </TableCell>
-          <TableCell
-            className="hidden md:table-cell text-sky-700 font-semibold"
-            suppressHydrationWarning
-          >
-            <span>
-              <LocalDistance requestTime={time} /> ({timeWithSeconds})
-            </span>
-          </TableCell>
-
-          {/* <TableCell>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button aria-haspopup="true" size="icon" variant="ghost">
-                  <MoreHorizontal className="h-4 w-4" />
-                  <span className="sr-only">Toggle menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>Delete</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </TableCell> */}
-        </TableRow>
+        <Row
+          key={product.id}
+          order={getOrder()}
+          fetchDetails={fetchDetails}
+          product={product}
+        />
       ))}
-    </TableBody>
+    </>
   );
 }
