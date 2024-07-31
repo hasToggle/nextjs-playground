@@ -1,9 +1,8 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { TableBody } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 
 import { Reload } from "./reload-button";
-import Table from "./table";
+import { ProductsTable } from "./table";
 import DataFetchingTabs from "./tabs";
 import EmptyRow from "./empty-row-skeleton";
 import { SourceInfo, Boundary } from "./source-info";
@@ -50,9 +49,9 @@ export default function DataFetching() {
                 Server / Client Component
               </Badge>
 
-              <Table>
-                <TableBody>{skeleton}</TableBody>
-              </Table>
+              <ProductsTable>
+                <>{skeleton}</>
+              </ProductsTable>
             </div>
           </CardContent>
           <CardFooter className="mt-3">
