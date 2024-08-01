@@ -29,7 +29,7 @@ export default function DataFetching() {
           <Boundary
             labels={["Server / Client Component"]}
             color="default"
-            animateRerendering={true}
+            animateRerendering={false}
             size="small"
           >
             <SourceInfo
@@ -49,7 +49,7 @@ export default function DataFetching() {
             <Boundary
               labels={["Server / Client Component"]}
               color="default"
-              animateRerendering={true}
+              animateRerendering={false}
               size="small"
             >
               <ProductsTable>
