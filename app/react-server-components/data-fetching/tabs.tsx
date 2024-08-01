@@ -21,6 +21,15 @@ export default function DataFetchingTabs({
         <TabsList>
           <TabsTrigger
             onClick={() =>
+              router.push("/react-server-components/data-fetching")
+            }
+            value="default"
+          >
+            <span className="mr-1">Choose</span>{" "}
+            <span aria-hidden="true">&rarr;</span>
+          </TabsTrigger>
+          <TabsTrigger
+            onClick={() =>
               router.push("/react-server-components/data-fetching/ssg")
             }
             value="ssg"

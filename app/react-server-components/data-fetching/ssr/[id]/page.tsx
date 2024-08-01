@@ -6,7 +6,6 @@ export async function generateStaticParams() {
 }
 
 export default async function SSR({ params }: { params: { id: string } }) {
-  /* fake a delay of 3 seconds during BUILD TIME */
   await new Promise((resolve) => setTimeout(resolve, 3000));
   const product = products.find(
     (product) => product.id === parseInt(params.id)

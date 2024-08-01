@@ -1,7 +1,5 @@
 import { CalendarIcon, CodeIcon, ClockIcon } from "@radix-ui/react-icons";
-import clsx from "clsx";
 
-import { Badge } from "@/components/ui/badge";
 import LocalDistance from "./local-distance-to-now";
 
 export function SourceInfo({
@@ -38,36 +36,5 @@ export function SourceInfo({
         </span>
       </div>
     </>
-  );
-}
-
-export function Boundary({
-  variant,
-  label,
-  children,
-}: {
-  variant: "server" | "client";
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div
-      className={clsx("relative mt-4 mb-2 px-4 py-5 border rounded-md", {
-        "border-purple-300": variant === "server",
-        "border-blue-300": variant === "client",
-      })}
-    >
-      <Badge
-        className={clsx("absolute left-3 -top-3 bg-white", {
-          "border-purple-300": variant === "server",
-          "border-blue-300": variant === "client",
-        })}
-        variant="outline"
-      >
-        {label}
-      </Badge>
-
-      {children}
-    </div>
   );
 }
