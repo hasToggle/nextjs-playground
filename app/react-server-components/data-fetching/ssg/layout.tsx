@@ -14,11 +14,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             posts, and documentation. The initial response is faster with SSG
             because the content is already built and cached. You can trigger a
             revalidation of the static page with{" "}
-            <Link href="https://nextjs.org/docs/app/api-reference/functions/revalidatePath">
+            <Link
+              href="https://nextjs.org/docs/app/api-reference/functions/revalidatePath"
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               revalidatePath
             </Link>{" "}
             and{" "}
-            <Link href="https://nextjs.org/docs/app/api-reference/functions/revalidateTag">
+            <Link
+              href="https://nextjs.org/docs/app/api-reference/functions/revalidateTag"
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               revalidateTag
             </Link>
             .

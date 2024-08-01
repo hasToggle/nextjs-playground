@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 
 import { Product } from "@/lib/data";
 
-import { CurrentPathLink } from "./links";
 import LocalDistance from "./local-distance-to-now";
 import Number from "./image-at-position";
 
@@ -61,14 +60,10 @@ export function Row({
   return (
     <TableRow>
       <TableCell className="hidden sm:table-cell">
-        <CurrentPathLink id={product.id}>
-          <Number value={order} />
-        </CurrentPathLink>
+        <Number value={order} />
       </TableCell>
 
-      <TableCell className="font-medium">
-        <CurrentPathLink id={product.id}>{product.name} </CurrentPathLink>
-      </TableCell>
+      <TableCell className="font-medium">{product.name}</TableCell>
 
       <TableCell>
         <Badge variant="outline" className="-ml-2.5">
