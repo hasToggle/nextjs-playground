@@ -8,7 +8,7 @@ import { SourceInfo } from "../source-info";
 import { Reload } from "../reload-button";
 import { ProductsTable, Row } from "../table";
 
-import { loader } from "@/lib/fake-db";
+import { getAllProducts } from "@/lib/fake-db";
 import { createNumberDispenser } from "@/lib/utils";
 
 export default function SSG() {
@@ -66,7 +66,7 @@ export default function SSG() {
 
 async function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   /* fake a delay of 3 seconds */
-  const products = await loader();
+  const products = await getAllProducts();
   /* get order in which the individual items eventually render */
   const getOrder = createNumberDispenser();
   return (

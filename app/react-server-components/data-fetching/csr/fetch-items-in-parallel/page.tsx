@@ -3,22 +3,19 @@
 import { useEffect, useState } from "react";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-
 import { Boundary } from "@/components/ui/boundary";
 
 import { type Product } from "@/lib/data";
-
 import { createNumberDispenser } from "@/lib/utils";
 
-import { ProductsTable, Row } from "../table";
+import { ProductsTable, Row } from "../../table";
+import DataFetchingTabs from "../../tabs";
+import EmptyRow from "../../empty-row-skeleton";
+import { SourceInfo } from "../../source-info";
+import { Reload } from "../../reload-button";
+import { FetchItemsInParallel } from "../../toggles";
 
-import DataFetchingTabs from "../tabs";
-import EmptyRow from "../empty-row-skeleton";
-import { SourceInfo } from "../source-info";
-import { Reload } from "../reload-button";
-import { FetchItemsInParallel } from "../toggles";
-
-export default function CSR() {
+export default function CSRInParallel() {
   /*
    * Strictly speaking, the request for data comes a bit further down in the page component,
    * but for the demo it's convenient to snapshot the moment here.
@@ -62,8 +59,8 @@ export default function CSR() {
         </CardContent>
         <CardFooter className="mt-3">
           <div className="text-xs text-muted-foreground">
-            Fetching all items incurs a deliberate{" "}
-            <strong>3 second delay</strong>.
+            To better observe how individual items are streaming in, fetching
+            all items can take <strong>up to 10 seconds</strong>.
           </div>
         </CardFooter>
       </DataFetchingTabs>
@@ -72,41 +69,59 @@ export default function CSR() {
 }
 
 function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/api/products", { cache: "no-store" });
-      const { products } = await response.json();
-      setProducts(products);
-    }
-    fetchData();
-  }, []);
-
-  if (products.length === 0) {
-    const skeleton = Array.from({ length: 4 }, (_, index) => (
-      <EmptyRow key={index} />
-    ));
-    return <>{skeleton}</>;
-  }
-
   /* get order in which the individual items eventually render */
   const getOrder = createNumberDispenser();
 
   return (
     <>
-      {products.map((product) => (
-        <Row
-          key={product.id}
-          order={getOrder()}
-          fetchDetails={{
-            fetchedOn: "at request time",
-            time: initiatedAt,
-            source: "on the Client",
-          }}
-          product={product}
+      {Array.from({ length: 4 }, (_, index) => (
+        <Item
+          key={index}
+          id={index + 1}
+          initiatedAt={initiatedAt}
+          getOrder={getOrder}
         />
       ))}
     </>
+  );
+}
+
+function Item({
+  id,
+  initiatedAt,
+  getOrder,
+}: {
+  id: number;
+  initiatedAt: Date;
+  getOrder: () => number;
+}) {
+  const [product, setProduct] = useState<Product>();
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`/api/products/${id}`, {
+        cache: "no-store",
+      });
+      const { product } = await response.json();
+      setProduct(product);
+    }
+    fetchData();
+  }, [id]);
+
+  if (!product) {
+    return <EmptyRow />;
+  }
+
+  return (
+    <Row
+      key={product.id}
+      order={getOrder()}
+      fetchDetails={{
+        fetchedOn: "at request time",
+        time: initiatedAt,
+        source: "on the Client",
+      }}
+      product={product}
+    />
   );
 }

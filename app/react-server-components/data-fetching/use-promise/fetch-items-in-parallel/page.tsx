@@ -5,22 +5,19 @@ import { Suspense } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Boundary } from "@/components/ui/boundary";
 
-import { FetchItemsInParallel } from "../toggles";
-import { Reload } from "../reload-button";
-import { ProductsTable, Row } from "../table";
-import DataFetchingTabs from "../tabs";
-import EmptyRow from "../empty-row-skeleton";
-import { SourceInfo } from "../source-info";
+import { getProduct, getProductIds } from "@/lib/fake-db";
 
-import { getAllProducts } from "@/lib/fake-db";
-import { createNumberDispenser } from "@/lib/utils";
+import { FetchItemsInParallel } from "../../toggles";
+import { ProductsTable } from "../../table";
+import DataFetchingTabs from "../../tabs";
+import EmptyRow from "../../empty-row-skeleton";
+import { Reload } from "../../reload-button";
+import { SourceInfo } from "../../source-info";
+import BoundaryToClient from "./client-use-promise";
 
 export const dynamic = "force-dynamic";
 
-export default function SSR() {
-  const skeleton = Array.from({ length: 4 }, (_, index) => (
-    <EmptyRow key={index} />
-  ));
+export default function UsePromiseInParallel() {
   /*
    * Strictly speaking, the request for data comes a bit further down in the page component,
    * but for the demo it's convenient to snapshot the moment here.
@@ -51,22 +48,20 @@ export default function SSR() {
 
         <CardContent className="p-0">
           <Boundary
-            labels={["Server Component"]}
-            color="violet"
+            labels={["Client Component"]}
+            color="blue"
             animateRerendering={true}
             size="small"
           >
             <ProductsTable>
-              <Suspense fallback={<>{skeleton}</>}>
-                <GoFetch initiatedAt={requestTime} />
-              </Suspense>
+              <GoFetch initiatedAt={requestTime} />
             </ProductsTable>
           </Boundary>
         </CardContent>
         <CardFooter className="mt-3">
           <div className="text-xs text-muted-foreground">
-            Fetching all items incurs a deliberate{" "}
-            <strong>3 second delay</strong>.
+            To better observe how individual items are streaming in, fetching
+            all items can take <strong>up to 10 seconds</strong>.
           </div>
         </CardFooter>
       </DataFetchingTabs>
@@ -74,24 +69,22 @@ export default function SSR() {
   );
 }
 
-async function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
-  /* fake a delay of 3 seconds */
-  const products = await getAllProducts();
-  /* get order in which the individual items eventually render */
-  const getOrder = createNumberDispenser();
+function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
+  const products = getProductIds();
+
   return (
     <>
       {products.map((product) => (
-        <Row
-          key={product.id}
-          order={getOrder()}
-          fetchDetails={{
-            fetchedOn: "at request time",
-            time: initiatedAt,
-            source: "on the Server",
-          }}
-          product={product}
-        />
+        <Suspense key={product.id} fallback={<EmptyRow />}>
+          <BoundaryToClient
+            product={getProduct(product.id)}
+            fetchDetails={{
+              fetchedOn: "at request time",
+              source: "on the Server",
+              time: initiatedAt,
+            }}
+          />
+        </Suspense>
       ))}
     </>
   );

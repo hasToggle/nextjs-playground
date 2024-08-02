@@ -55,7 +55,7 @@ export function Row({
     second: "2-digit",
     hour12: false,
     timeZoneName: "short",
-  }).format(time);
+  }).format(new Date());
 
   return (
     <TableRow>

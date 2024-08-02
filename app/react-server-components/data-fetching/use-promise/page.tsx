@@ -8,6 +8,7 @@ import { Boundary } from "@/components/ui/boundary";
 
 import { getAllProducts } from "@/lib/fake-db";
 
+import { FetchItemsInParallel } from "../toggles";
 import { ProductsTable } from "../table";
 import DataFetchingTabs from "../tabs";
 import EmptyRow from "../empty-row-skeleton";
@@ -43,7 +44,7 @@ export default function UsePromise() {
 
         <div className="flex space-x-1 mt-3 mb-6">
           <Reload />
-          {/* <FetchItemsIndividually /> */}
+          <FetchItemsInParallel />
         </div>
 
         <CardContent className="p-0">

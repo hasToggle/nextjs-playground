@@ -7,15 +7,14 @@ import { Toggle } from "@/components/ui/toggle";
 
 export function FetchItemsInParallel() {
   const router = useRouter();
-  const isPressed = usePathname().includes("fetch-items-in-parallel");
+  const pathname = usePathname();
+  const isPressed = pathname.includes("fetch-items-in-parallel");
 
   const handleOnChange = (pressed: boolean) => {
     if (pressed) {
-      router.push(
-        "/react-server-components/data-fetching/ssr/fetch-items-in-parallel"
-      );
+      router.push(`${pathname}/fetch-items-in-parallel`);
     } else {
-      router.push("/react-server-components/data-fetching/ssr");
+      router.push(pathname.split("/fetch-items-in-parallel")[0]);
     }
   };
 
