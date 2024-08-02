@@ -14,16 +14,12 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-import { Playlist } from "@/lib/playlists";
+import { Footer } from "./footer";
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  playlists: Playlist[];
-}
-
-export function Sidebar({ className, playlists }: SidebarProps) {
+export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
   const router = useRouter();
   return (
-    <div className={cn("pb-12", className)}>
+    <div className={cn("relative pb-12", className)}>
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
@@ -102,6 +98,8 @@ export function Sidebar({ className, playlists }: SidebarProps) {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

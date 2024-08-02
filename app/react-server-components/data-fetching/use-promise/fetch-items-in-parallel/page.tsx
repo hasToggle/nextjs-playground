@@ -13,7 +13,7 @@ import DataFetchingTabs from "../../tabs";
 import EmptyRow from "../../empty-row-skeleton";
 import { Reload } from "../../reload-button";
 import { SourceInfo } from "../../source-info";
-import BoundaryToClient from "./client-use-promise";
+import BoundaryToClient from "./client-side-use-api";
 
 export const dynamic = "force-dynamic";
 

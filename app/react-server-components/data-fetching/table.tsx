@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Product } from "@/lib/data";
 
 import LocalDistance from "./local-distance-to-now";
-import Number from "./image-at-position";
+import Number from "./number-image";
 
 export function ProductsTable({ children }: { children: React.ReactNode }) {
   return (

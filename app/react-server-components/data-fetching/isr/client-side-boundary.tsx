@@ -6,6 +6,13 @@ import useLocalStorage from "use-local-storage";
 
 import { Boundary } from "@/components/ui/boundary";
 
+/**
+ * This component is used to detect if the page has been regenerated
+ * on the server side, using the timespamp of the original request time
+ * and comparing it to the stored time in local storage. If the times
+ * don't match, we know that the page has been regenerated and the component
+ * will trigger an animation for the re-render.
+ */
 export default function ClientSideBoundary({
   requestTime,
   children,

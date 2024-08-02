@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             revalidation of the static page with{" "}
             <Link
               href="https://nextjs.org/docs/app/api-reference/functions/revalidatePath"
-              className="underline"
+              className="font-medium underline underline-offset-4"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             and{" "}
             <Link
               href="https://nextjs.org/docs/app/api-reference/functions/revalidateTag"
-              className="underline"
+              className="font-medium underline underline-offset-4"
               target="_blank"
               rel="noopener noreferrer"
             >

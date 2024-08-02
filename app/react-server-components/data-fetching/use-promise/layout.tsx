@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             That is where the new{" "}
             <Link
               href="https://react.dev/reference/react/use"
-              className="underline"
+              className="font-medium underline underline-offset-4"
               target="_blank"
               rel="noopener noreferrer"
             >
