@@ -5,7 +5,7 @@ const features = [
   {
     name: "React State",
     description:
-      "State is the heart of every Client Component. To see how state is managed in React, explore the demo and click on the counter to visually see how a component's code is run again.",
+      "State is at the heart of every Client Component. To see how state is managed in React, explore the demo and click on the counter to visually see how a component's code is run again.",
     href: "/react-basics/react-state",
     icon: PowerIcon,
   },
