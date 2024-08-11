@@ -20,7 +20,7 @@ function TableRowSkeleton() {
       </TableCell>
 
       <TableCell className="font-medium">
-        <Skeleton className="h-4 w-[160px] bg-gray-200" />
+        <Skeleton className="h-4 w-[170px] bg-gray-200" />
       </TableCell>
 
       <TableCell>
@@ -28,11 +28,11 @@ function TableRowSkeleton() {
       </TableCell>
 
       <TableCell className="hidden md:table-cell">
-        <Skeleton className="h-4 w-[30px] bg-gray-200" />
+        <Skeleton className="h-4 w-[80px] bg-gray-200" />
       </TableCell>
 
       <TableCell className="hidden md:table-cell">
-        <Skeleton className="h-4 w-[180px] rounded-md bg-gray-200" />
+        <Skeleton className="h-4 w-[260px] rounded-md bg-gray-200" />
       </TableCell>
     </TableRow>
   );

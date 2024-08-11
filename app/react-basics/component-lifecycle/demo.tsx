@@ -4,16 +4,15 @@ import { useState, useCallback } from "react";
 
 import { EyeOpenIcon, EyeNoneIcon } from "@radix-ui/react-icons";
 
+import { listenNowAlbums } from "@/lib/albums";
+
+import { AlbumArtwork } from "@/components/album-artwork";
+import { Hover } from "@/components/hover-card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Hover } from "@/components/hover-card";
 import { Badge } from "@/components/ui/badge";
-
-import { AlbumArtwork } from "@/components/album-artwork";
-import { PodcastEmptyPlaceholder } from "@/components/podcast-empty-placeholder";
-import { listenNowAlbums, madeForYouAlbums } from "@/lib/albums";
 
 const LIFECYCLE_EVENTS: { [key: string]: string } = {
   idle: "Waiting for user interaction.",
@@ -63,7 +62,6 @@ export default function LifecycleDemo() {
               <Separator className="mt-4 mb-8" />
               <div className="relative flex h-[450px] w-[700px] space-x-20 rounded-md border border-dashed border-gray-500">
                 <span className="absolute -top-5 left-1 rounded-md px-4 font-medium">
-                  {/* <SwitchWithLabel label="Show" /> */}
                   <Button
                     className="border-2 border-orange-100 hover:border-orange-950"
                     onClick={() => {
@@ -86,7 +84,6 @@ export default function LifecycleDemo() {
                 </span>
                 <div className="flex max-w-[420px] flex-col items-center justify-center">
                   <LifecycleState state={currentState} />
-                  {/* <CodeDisplay /> */}
                 </div>
                 <div className="flex max-w-[420px] flex-col items-center justify-center">
                   {show && (
@@ -161,20 +158,6 @@ export default function LifecycleDemo() {
               <AlbumArtworks />
             </TabsContent>
           </Tabs>
-
-          {/* <Separator className="my-4" />
-          <div className="flex items-center justify-between">
-            <div className="space-y-1">
-              <h2 className="text-2xl font-semibold tracking-tight">
-                New Episodes
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Your favorite podcasts. Updated daily.
-              </p>
-            </div>
-          </div>
-          <Separator className="my-4" />
-          <PodcastEmptyPlaceholder /> */}
         </div>
       </div>
     </>
@@ -219,10 +202,6 @@ function ArtworkItem({ album }: { album: any }) {
       />
     </div>
   );
-}
-
-function CodeDisplay() {
-  return <div>code</div>;
 }
 
 function LifecycleState({ state = "idle" }) {
