@@ -1,16 +1,13 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Boundary } from "@/components/ui/boundary";
 
-import { Reload } from "./reload-button";
-import { ProductsTable } from "./table";
 import DataFetchingTabs from "./tabs";
-import EmptyRow from "./empty-row-skeleton";
+import EmptyRowSkeleton from "./empty-row-skeleton";
+import { ProductsTable } from "./table";
 import { SourceInfo } from "./source-info";
+import { Reload } from "./reload-button";
 
 export default function DataFetching() {
-  const skeleton = Array.from({ length: 4 }, (_, index) => (
-    <EmptyRow key={index} />
-  ));
   return (
     <>
       <div className="h-28">
@@ -53,7 +50,7 @@ export default function DataFetching() {
               size="small"
             >
               <ProductsTable>
-                <>{skeleton}</>
+                <EmptyRowSkeleton count={4} />
               </ProductsTable>
             </Boundary>
           </CardContent>

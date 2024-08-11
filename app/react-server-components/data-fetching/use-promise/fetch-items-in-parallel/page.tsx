@@ -7,21 +7,17 @@ import { Boundary } from "@/components/ui/boundary";
 
 import { getProduct, getProductIds } from "@/lib/fake-db";
 
+import BoundaryToClient from "./client-side-use-api";
+import DataFetchingTabs from "../../tabs";
+import EmptyRowSkeleton from "../../empty-row-skeleton";
 import { FetchItemsInParallel } from "../../toggles";
 import { ProductsTable } from "../../table";
-import DataFetchingTabs from "../../tabs";
-import EmptyRow from "../../empty-row-skeleton";
-import { Reload } from "../../reload-button";
 import { SourceInfo } from "../../source-info";
-import BoundaryToClient from "./client-side-use-api";
+import { Reload } from "../../reload-button";
 
 export const dynamic = "force-dynamic";
 
 export default function UsePromiseInParallel() {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
   const requestTime = new Date();
   return (
     <Card className="mt-6 p-4">
@@ -75,7 +71,7 @@ function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   return (
     <>
       {products.map((product) => (
-        <Suspense key={product.id} fallback={<EmptyRow />}>
+        <Suspense key={product.id} fallback={<EmptyRowSkeleton />}>
           <BoundaryToClient
             product={getProduct(product.id)}
             fetchDetails={{

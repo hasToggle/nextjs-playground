@@ -1,9 +1,20 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { TableCell, TableRow } from "@/components/ui/table";
 
-export default function EmptyRow() {
+interface EmptyRowSkeletonProps {
+  count?: number;
+}
+export default function EmptyRowSkeleton({ count = 1 }: EmptyRowSkeletonProps) {
+  const skeleton = Array.from({ length: count }, (_, index) => (
+    <TableRowSkeleton key={index} />
+  ));
+
+  return <>{skeleton}</>;
+}
+
+function TableRowSkeleton() {
   return (
-    <TableRow key={Math.random().toString(36).substring(2)}>
+    <TableRow>
       <TableCell className="hidden sm:table-cell">
         <Skeleton className="h-[40px] w-[40px] rounded-md bg-gray-200" />
       </TableCell>

@@ -3,26 +3,21 @@ import "server-only";
 import { Suspense } from "react";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-
 import { Boundary } from "@/components/ui/boundary";
 
 import { getAllProducts } from "@/lib/fake-db";
 
+import ClientComponent from "./client-use-promise";
+import EmptyRowSkeleton from "../empty-row-skeleton";
+import DataFetchingTabs from "../tabs";
 import { FetchItemsInParallel } from "../toggles";
 import { ProductsTable } from "../table";
-import DataFetchingTabs from "../tabs";
-import EmptyRow from "../empty-row-skeleton";
-import { Reload } from "../reload-button";
-import ClientComponent from "./client-use-promise";
 import { SourceInfo } from "../source-info";
+import { Reload } from "../reload-button";
 
 export const dynamic = "force-dynamic";
 
 export default function UsePromise() {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
   const requestTime = new Date();
   return (
     <Card className="mt-6 p-4">
@@ -73,12 +68,8 @@ export default function UsePromise() {
 function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   const products = getAllProducts();
 
-  const skeleton = Array.from({ length: 4 }, (_, index) => (
-    <EmptyRow key={index} />
-  ));
-
   return (
-    <Suspense fallback={<>{skeleton}</>}>
+    <Suspense fallback={<EmptyRowSkeleton count={4} />}>
       <ClientComponent
         fetchDetails={{
           fetchedOn: "at request time",

@@ -5,23 +5,18 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Boundary } from "@/components/ui/boundary";
 
-import { type Product } from "@/lib/data";
 import { createNumberDispenser } from "@/lib/utils";
+import { type Product } from "@/lib/data";
 
-import { ProductsTable, Row } from "../../table";
 import DataFetchingTabs from "../../tabs";
-import EmptyRow from "../../empty-row-skeleton";
+import EmptyRowSkeleton from "../../empty-row-skeleton";
+import { FetchItemsInParallel } from "../../toggles";
+import { ProductsTable, Row } from "../../table";
 import { SourceInfo } from "../../source-info";
 import { Reload } from "../../reload-button";
-import { FetchItemsInParallel } from "../../toggles";
 
 export default function CSRInParallel() {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
   const requestTime = new Date();
-
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
@@ -109,7 +104,7 @@ function Item({
   }, [id]);
 
   if (!product) {
-    return <EmptyRow />;
+    return <EmptyRowSkeleton />;
   }
 
   return (

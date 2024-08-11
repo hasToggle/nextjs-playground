@@ -5,26 +5,19 @@ import { Suspense } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Boundary } from "@/components/ui/boundary";
 
-import { FetchItemsInParallel } from "../toggles";
-import { Reload } from "../reload-button";
-import { ProductsTable, Row } from "../table";
-import DataFetchingTabs from "../tabs";
-import EmptyRow from "../empty-row-skeleton";
-import { SourceInfo } from "../source-info";
-
 import { getAllProducts } from "@/lib/fake-db";
 import { createNumberDispenser } from "@/lib/utils";
+
+import DataFetchingTabs from "../tabs";
+import EmptyRowSkeleton from "../empty-row-skeleton";
+import { FetchItemsInParallel } from "../toggles";
+import { ProductsTable, Row } from "../table";
+import { SourceInfo } from "../source-info";
+import { Reload } from "../reload-button";
 
 export const dynamic = "force-dynamic";
 
 export default function SSR() {
-  const skeleton = Array.from({ length: 4 }, (_, index) => (
-    <EmptyRow key={index} />
-  ));
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
   const requestTime = new Date();
   return (
     <Card className="mt-6 p-4">
@@ -57,7 +50,7 @@ export default function SSR() {
             size="small"
           >
             <ProductsTable>
-              <Suspense fallback={<>{skeleton}</>}>
+              <Suspense fallback={<EmptyRowSkeleton count={4} />}>
                 <GoFetch initiatedAt={requestTime} />
               </Suspense>
             </ProductsTable>

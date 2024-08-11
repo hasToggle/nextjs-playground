@@ -5,15 +5,15 @@ import { Suspense } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Boundary } from "@/components/ui/boundary";
 
-import { FetchItemsInParallel } from "../../toggles";
-import { Reload } from "../../reload-button";
-import DataFetchingTabs from "../../tabs";
-import { SourceInfo } from "../../source-info";
-import { ProductsTable, Row } from "../../table";
-import EmptyRow from "../../empty-row-skeleton";
-
 import { getProductIds, getProduct } from "@/lib/fake-db";
 import { createNumberDispenser } from "@/lib/utils";
+
+import DataFetchingTabs from "../../tabs";
+import EmptyRowSkeleton from "../../empty-row-skeleton";
+import { FetchItemsInParallel } from "../../toggles";
+import { ProductsTable, Row } from "../../table";
+import { SourceInfo } from "../../source-info";
+import { Reload } from "../../reload-button";
 
 export const dynamic = "force-dynamic";
 
@@ -76,7 +76,7 @@ function GoFetch({ initiatedAt }: { initiatedAt: Date }) {
   return (
     <>
       {products.map((product) => (
-        <Suspense key={product.id} fallback={<EmptyRow />}>
+        <Suspense key={product.id} fallback={<EmptyRowSkeleton />}>
           <Item
             id={product.id}
             onResolved={getOrder}

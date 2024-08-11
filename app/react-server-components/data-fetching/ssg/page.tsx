@@ -3,19 +3,15 @@ import "server-only";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Boundary } from "@/components/ui/boundary";
 
+import { createNumberDispenser } from "@/lib/utils";
+import { getAllProducts } from "@/lib/fake-db";
+
 import DataFetchingTabs from "../tabs";
+import { ProductsTable, Row } from "../table";
 import { SourceInfo } from "../source-info";
 import { Reload } from "../reload-button";
-import { ProductsTable, Row } from "../table";
-
-import { getAllProducts } from "@/lib/fake-db";
-import { createNumberDispenser } from "@/lib/utils";
 
 export default function SSG() {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
   const requestTime = new Date();
   return (
     <Card className="mt-6 p-4">
