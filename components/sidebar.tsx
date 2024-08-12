@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -78,6 +79,7 @@ const teams = [
 
 export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const currentPath = usePathname();
   return (
     <>
       <div className={cn(className)}>
@@ -108,7 +110,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                   </button>
                 </div>
               </TransitionChild>
-              {/* Sidebar component, swap this element with another sidebar if you like */}
+
               <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
                 <div className="flex h-16 shrink-0 items-center">
                   <Link href="/">
@@ -131,18 +133,18 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                             <Link
                               href={item.href}
                               className={cn(
-                                item.current
-                                  ? "bg-gray-50 text-indigo-600"
-                                  : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                                item.href === currentPath
+                                  ? "bg-gray-50 text-amber-600"
+                                  : "text-gray-700 hover:bg-gray-50 hover:text-amber-600",
                                 "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                               )}
                             >
                               <item.icon
                                 aria-hidden="true"
                                 className={cn(
-                                  item.current
-                                    ? "text-indigo-600"
-                                    : "text-gray-400 group-hover:text-indigo-600",
+                                  item.href === currentPath
+                                    ? "text-amber-600"
+                                    : "text-gray-400 group-hover:text-amber-600",
                                   "h-6 w-6 shrink-0"
                                 )}
                               />
@@ -154,7 +156,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                     </li>
                     <li>
                       <div className="text-xs font-semibold leading-6 text-gray-400">
-                        React Server Components
+                        Data & Rendering
                       </div>
                       <ul role="list" className="-mx-2 mt-2 space-y-1">
                         {teams.map((team) => (
@@ -162,18 +164,18 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                             <Link
                               href={team.href}
                               className={cn(
-                                team.current
-                                  ? "bg-gray-50 text-indigo-600"
-                                  : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                                team.href === currentPath
+                                  ? "bg-gray-50 text-amber-600"
+                                  : "text-gray-700 hover:bg-gray-50 hover:text-amber-600",
                                 "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                               )}
                             >
                               <span
                                 className={cn(
-                                  team.current
-                                    ? "border-indigo-600 text-indigo-600"
-                                    : "border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600",
-                                  "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium"
+                                  team.href === currentPath
+                                    ? "border-amber-600 text-amber-600"
+                                    : "border-gray-200 text-gray-400 group-hover:border-amber-600 group-hover:text-amber-600",
+                                  "h-6 w-6 shrink-0"
                                 )}
                               >
                                 <team.icon aria-hidden="true" />
@@ -193,7 +195,6 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
 
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
             <div className="flex h-16 shrink-0 items-center">
               <Link href="/">
@@ -216,18 +217,18 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                         <Link
                           href={item.href}
                           className={cn(
-                            item.current
-                              ? "bg-gray-50 text-indigo-600"
-                              : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                            item.href === currentPath
+                              ? "bg-gray-50 text-amber-600"
+                              : "text-gray-700 hover:bg-gray-50 hover:text-amber-600",
                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                           )}
                         >
                           <item.icon
                             aria-hidden="true"
                             className={cn(
-                              item.current
-                                ? "text-indigo-600"
-                                : "text-gray-400 group-hover:text-indigo-600",
+                              item.href === currentPath
+                                ? "text-amber-600"
+                                : "text-gray-400 group-hover:text-amber-600",
                               "h-6 w-6 shrink-0"
                             )}
                           />
@@ -239,7 +240,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                 </li>
                 <li>
                   <div className="text-xs font-semibold leading-6 text-gray-400">
-                    React Server Components
+                    Data & Rendering
                   </div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {teams.map((team) => (
@@ -247,18 +248,18 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                         <Link
                           href={team.href}
                           className={cn(
-                            team.current
-                              ? "bg-gray-50 text-indigo-600"
-                              : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                            team.href === currentPath
+                              ? "bg-gray-50 text-amber-600"
+                              : "text-gray-700 hover:bg-gray-50 hover:text-amber-600",
                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                           )}
                         >
                           <span
                             className={cn(
-                              team.current
-                                ? "border-indigo-600 text-indigo-600"
-                                : "border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600",
-                              "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium"
+                              team.href === currentPath
+                                ? "border-amber-600 text-amber-600"
+                                : "border-gray-200 text-gray-400 group-hover:border-amber-600 group-hover:text-amber-600",
+                              "h-6 w-6 shrink-0"
                             )}
                           >
                             <team.icon aria-hidden="true" />

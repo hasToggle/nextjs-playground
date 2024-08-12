@@ -13,10 +13,15 @@ export default function DataFetching() {
       <div className="h-28">
         <div className="px-4 py-3 my-auto border rounded-lg">
           <p className="text-muted-foreground">
-            RSCs are a new primitive that enables developers to build
-            applications that are faster by default. This demo is using the App
-            Router in Next, which automatically opts into using React Server
-            Components.
+            React Server Components (RSCs) introduce a powerful new way to build
+            faster and more efficient applications by default. They allow
+            developers to seamlessly combine server-side and client-side logic
+            within a single React application. Server components can fetch and
+            process data directly on the server, optimizing performance, while
+            client components handle the interactivity on the client side,
+            ensuring a responsive and engaging user experience. This blend of
+            server and client capabilities offers a streamlined approach to
+            building modern web applications.
           </p>
         </div>
       </div>
@@ -56,8 +61,7 @@ export default function DataFetching() {
           </CardContent>
           <CardFooter className="mt-3">
             <div className="text-xs text-muted-foreground">
-              Fetching items incurs a deliberate <strong>3 second delay</strong>
-              .
+              Choose a <strong>rendering strategy</strong> to see the behavior.
             </div>
           </CardFooter>
         </DataFetchingTabs>

@@ -1,3 +1,6 @@
+import { CalendarIcon, CodeIcon, ClockIcon } from "@radix-ui/react-icons";
+
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableHead,
@@ -6,7 +9,6 @@ import {
   TableRow,
   TableCell,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 
 import { Product } from "@/lib/data";
 
@@ -22,12 +24,24 @@ export function ProductsTable({ children }: { children: React.ReactNode }) {
             <span className="sr-only">Image</span>
           </TableHead>
           <TableHead>Name</TableHead>
-          <TableHead>Resolved</TableHead>
-          <TableHead className="hidden md:table-cell">Where</TableHead>
-          <TableHead className="hidden md:table-cell">When</TableHead>
-          {/* <TableHead>
-            <span className="sr-only">Actions</span>
-          </TableHead> */}
+          <TableHead>
+            <div className="flex items-center">
+              <ClockIcon className="mr-2 h-4 w-4" />
+              Fetch resolved
+            </div>
+          </TableHead>
+          <TableHead className="hidden md:table-cell">
+            <div className="flex items-center">
+              <CodeIcon className="mr-2 h-4 w-4" />
+              Environment
+            </div>
+          </TableHead>
+          <TableHead className="hidden md:table-cell">
+            <div className="flex items-center">
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              Time when resolved
+            </div>
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>{children}</TableBody>
@@ -83,21 +97,6 @@ export function Row({
           <LocalDistance requestTime={time} /> ({timeWithSeconds})
         </span>
       </TableCell>
-      {/* <TableCell>
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button aria-haspopup="true" size="icon" variant="ghost">
-        <MoreHorizontal className="h-4 w-4" />
-        <span className="sr-only">Toggle menu</span>
-      </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent align="end">
-      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-      <DropdownMenuItem>Edit</DropdownMenuItem>
-      <DropdownMenuItem>Delete</DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
-</TableCell> */}
     </TableRow>
   );
 }
