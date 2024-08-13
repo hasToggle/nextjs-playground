@@ -12,7 +12,7 @@ export default function Number({ value = 0 }: { value: number }) {
   return (
     <Image
       alt="Indicates the order in which the items have been rendered."
-      className="rounded-md aspect-square mx-auto"
+      className="mx-auto aspect-square rounded-md"
       height="40"
       src={SVG}
       width="40"

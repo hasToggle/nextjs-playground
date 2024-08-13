@@ -18,7 +18,7 @@ function TableRowSkeleton() {
       <TableCell className="hidden sm:table-cell">
         <Skeleton className="h-[40px] w-[40px] rounded-md bg-gray-200" />
       </TableCell>
-
+      {/*  */}
       <TableCell className="font-medium">
         <Skeleton className="h-4 w-[170px] bg-gray-200" />
       </TableCell>

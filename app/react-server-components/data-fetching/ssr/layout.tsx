@@ -4,7 +4,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className="h-28">
-        <div className="px-4 py-3 my-auto border rounded-lg">
+        <div className="my-auto rounded-lg border px-4 py-3">
           <div>
             Products are fetched at request time and streamed to the user. The
             initial response is slower with SSR because the server has to fetch

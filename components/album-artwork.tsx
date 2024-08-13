@@ -60,11 +60,14 @@ export function AlbumArtwork({
           clearTimeout(id);
         };
       } else {
-        const id = setTimeout(() => {
-          setLoading(false);
-          onMount?.("idle");
-          clearTimeout(id);
-        }, 2500 + Math.random() * 2000);
+        const id = setTimeout(
+          () => {
+            setLoading(false);
+            onMount?.("idle");
+            clearTimeout(id);
+          },
+          2500 + Math.random() * 2000,
+        );
         return () => {
           clearTimeout(id);
         };
@@ -100,8 +103,8 @@ export function AlbumArtwork({
             width={width}
             height={height}
             className={cn(
-              "h-auto w-auto object-cover blur-sm rounded-md",
-              aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
+              "h-auto w-auto rounded-md object-cover blur-sm",
+              aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square",
             )}
           />
         </div>
@@ -128,7 +131,7 @@ export function AlbumArtwork({
   return (
     <div className={cn("space-y-3", className)} {...props}>
       <div
-        className={`relative rounded-md transition-all hover:scale-[1.01] ring-4 ${
+        className={`relative rounded-md ring-4 transition-all hover:scale-[1.01] ${
           !loading && alreadyRunOnce.current && "ring-sky-600"
         } ${
           !loading && alreadyRunOnce.current && !progress && "cursor-pointer"
@@ -142,15 +145,15 @@ export function AlbumArtwork({
           width={width}
           height={height}
           className={cn(
-            "h-auto w-auto object-cover rounded-md",
-            aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
+            "h-auto w-auto rounded-md object-cover",
+            aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square",
           )}
         />
         {loading && (
           <Image
             src={Spinner}
             alt=""
-            className="absolute top-1/3 left-1/3 -ml-4 -mt-1"
+            className="absolute left-1/3 top-1/3 -ml-4 -mt-1"
             height={120}
             width={120}
           />
@@ -159,7 +162,7 @@ export function AlbumArtwork({
           <Image
             src={Play}
             alt=""
-            className="absolute top-1/3 left-1/3 -ml-4 -mt-1 select-none"
+            className="absolute left-1/3 top-1/3 -ml-4 -mt-1 select-none"
             height={120}
             width={120}
           />

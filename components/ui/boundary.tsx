@@ -12,7 +12,7 @@ const Label = ({
 }) => {
   return (
     <div
-      className={clsx("rounded-full py-1 px-4 shadow-[0_0_1px_2px_black]", {
+      className={clsx("rounded-full px-4 py-1 shadow-[0_0_1px_2px_black]", {
         "bg-gray-800 text-gray-300": color === "default",
         "bg-hastoggle-pink text-pink-50": color === "pink",
         "bg-hastoggle-blue text-white": color === "blue",
@@ -59,7 +59,7 @@ export const Boundary = ({
           {
             "left-5": size === "small",
             "left-7": size === "default",
-          }
+          },
         )}
       >
         {labels.map((label) => {

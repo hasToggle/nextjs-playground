@@ -7,7 +7,6 @@ import { Row } from "../table";
 import { createNumberDispenser } from "@/lib/utils";
 
 export default function ClientComponent({
-  /* if some props can't be serialized, why not make the linter scream at us here? => Because you can wrap this component within another client component and pass props then */
   fetchDetails,
   products,
 }: {

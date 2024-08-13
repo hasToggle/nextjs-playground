@@ -35,7 +35,7 @@ export default function CSRInParallel() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mt-3 mb-6">
+        <div className="mb-6 mt-3 flex space-x-1">
           <Reload />
           <FetchItemsInParallel />
         </div>

@@ -5,7 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 
 export default function LocalDistance({ requestTime }: { requestTime: Date }) {
   const [relativeDate, setRelativeDate] = useState<string>(
-    formatDistanceToNow(requestTime, { includeSeconds: true, addSuffix: true })
+    formatDistanceToNow(requestTime, { includeSeconds: true, addSuffix: true }),
   );
 
   useEffect(() => {
@@ -13,9 +13,9 @@ export default function LocalDistance({ requestTime }: { requestTime: Date }) {
       formatDistanceToNow(requestTime, {
         includeSeconds: true,
         addSuffix: true,
-      })
+      }),
     );
-  }, []);
+  }, [requestTime]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,7 +23,7 @@ export default function LocalDistance({ requestTime }: { requestTime: Date }) {
         formatDistanceToNow(requestTime, {
           includeSeconds: true,
           addSuffix: true,
-        })
+        }),
       );
     }, 30000);
 

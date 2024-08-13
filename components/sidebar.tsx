@@ -136,7 +136,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                                 item.href === currentPath
                                   ? "bg-gray-50 text-amber-600"
                                   : "text-gray-700 hover:bg-gray-50 hover:text-amber-600",
-                                "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                               )}
                             >
                               <item.icon
@@ -145,7 +145,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                                   item.href === currentPath
                                     ? "text-amber-600"
                                     : "text-gray-400 group-hover:text-amber-600",
-                                  "h-6 w-6 shrink-0"
+                                  "h-6 w-6 shrink-0",
                                 )}
                               />
                               {item.name}
@@ -167,7 +167,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                                 team.href === currentPath
                                   ? "bg-gray-50 text-amber-600"
                                   : "text-gray-700 hover:bg-gray-50 hover:text-amber-600",
-                                "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                                "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                               )}
                             >
                               <span
@@ -175,7 +175,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                                   team.href === currentPath
                                     ? "border-amber-600 text-amber-600"
                                     : "border-gray-200 text-gray-400 group-hover:border-amber-600 group-hover:text-amber-600",
-                                  "h-6 w-6 shrink-0"
+                                  "h-6 w-6 shrink-0",
                                 )}
                               >
                                 <team.icon aria-hidden="true" />
@@ -220,7 +220,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                             item.href === currentPath
                               ? "bg-gray-50 text-amber-600"
                               : "text-gray-700 hover:bg-gray-50 hover:text-amber-600",
-                            "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                            "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                           )}
                         >
                           <item.icon
@@ -229,7 +229,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                               item.href === currentPath
                                 ? "text-amber-600"
                                 : "text-gray-400 group-hover:text-amber-600",
-                              "h-6 w-6 shrink-0"
+                              "h-6 w-6 shrink-0",
                             )}
                           />
                           {item.name}
@@ -251,7 +251,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                             team.href === currentPath
                               ? "bg-gray-50 text-amber-600"
                               : "text-gray-700 hover:bg-gray-50 hover:text-amber-600",
-                            "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
+                            "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                           )}
                         >
                           <span
@@ -259,7 +259,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                               team.href === currentPath
                                 ? "border-amber-600 text-amber-600"
                                 : "border-gray-200 text-gray-400 group-hover:border-amber-600 group-hover:text-amber-600",
-                              "h-6 w-6 shrink-0"
+                              "h-6 w-6 shrink-0",
                             )}
                           >
                             <team.icon aria-hidden="true" />
@@ -270,7 +270,7 @@ export function Sidebar({ className }: React.HTMLAttributes<HTMLDivElement>) {
                     ))}
                   </ul>
                 </li>
-                <li className="-mx-6 mt-auto relative">
+                <li className="relative -mx-6 mt-auto">
                   <Footer />
                 </li>
               </ul>

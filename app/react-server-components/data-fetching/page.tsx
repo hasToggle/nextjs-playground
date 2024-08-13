@@ -11,7 +11,7 @@ export default function DataFetching() {
   return (
     <>
       <div className="h-28">
-        <div className="px-4 py-3 my-auto border rounded-lg">
+        <div className="my-auto rounded-lg border px-4 py-3">
           <p className="text-muted-foreground">
             React Server Components (RSCs) introduce a powerful new way to build
             faster and more efficient applications by default. They allow
@@ -43,7 +43,7 @@ export default function DataFetching() {
             />
           </Boundary>
 
-          <div className="flex space-x-1 mt-3 mb-6">
+          <div className="mb-6 mt-3 flex space-x-1">
             <Reload disabled />
           </div>
 

@@ -19,7 +19,7 @@ export default function Button({
               variant === "default",
             "text-pink-500 enabled:hover:text-pink-400 enabled:hover:shadow-[0_0_0.5em_0em_rgba(236,72,153,0.6)]":
               variant === "pink",
-          }
+          },
         )}
         {...props}
       />

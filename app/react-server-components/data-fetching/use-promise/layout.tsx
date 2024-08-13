@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className="h-28">
-        <div className="px-4 py-3 my-auto border rounded-lg">
+        <div className="my-auto rounded-lg border px-4 py-3">
           <div>
             Products are initiated as a Promise at request time on the server
             (without awaiting it) and forwarded to the client.

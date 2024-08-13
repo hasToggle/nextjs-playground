@@ -90,7 +90,7 @@ export function Row({
         </Badge>
       </TableCell>
       <TableCell
-        className="hidden md:table-cell text-stone-700 font-semibold"
+        className="hidden font-semibold text-stone-700 md:table-cell"
         suppressHydrationWarning
       >
         <span>

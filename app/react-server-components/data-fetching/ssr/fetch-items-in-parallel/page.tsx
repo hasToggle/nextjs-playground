@@ -18,10 +18,6 @@ import { Reload } from "../../reload-button";
 export const dynamic = "force-dynamic";
 
 export default function SSRInParallel() {
-  /*
-   * Strictly speaking, the request for data comes a bit further down in the page component,
-   * but for the demo it's convenient to snapshot the moment here.
-   */
   const requestTime = new Date();
   return (
     <Card className="mt-6 p-4">
@@ -41,7 +37,7 @@ export default function SSRInParallel() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mt-3 mb-6">
+        <div className="mb-6 mt-3 flex space-x-1">
           <Reload />
           <FetchItemsInParallel />
         </div>

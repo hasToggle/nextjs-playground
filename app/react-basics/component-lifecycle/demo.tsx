@@ -59,7 +59,7 @@ export default function LifecycleDemo() {
                   </p>
                 </div>
               </div>
-              <Separator className="mt-4 mb-8" />
+              <Separator className="mb-8 mt-4" />
               <div className="relative flex h-[450px] w-[700px] space-x-20 rounded-md border border-dashed border-gray-500">
                 <span className="absolute -top-5 left-1 rounded-md px-4 font-medium">
                   <Button
@@ -167,7 +167,7 @@ export default function LifecycleDemo() {
 function AlbumArtworks() {
   return (
     <div className="relative flex h-[500px] space-x-20 rounded-md border border-dashed border-gray-500">
-      <div className="mt-14 ml-5 flex space-x-4 pb-4">
+      <div className="ml-5 mt-14 flex space-x-4 pb-4">
         {listenNowAlbums.map((album) => (
           <ArtworkItem key={album.name} album={album} />
         ))}
@@ -181,14 +181,14 @@ function ArtworkItem({ album }: { album: any }) {
 
   const handleState = useCallback(
     (status: any) => setLifecycleState(status),
-    []
+    [],
   );
 
   return (
     <div key={album.name} className="relative">
       <Badge
         variant="outline"
-        className="absolute -top-9 left-0 rounded-md px-4 font-medium text-sm"
+        className="absolute -top-9 left-0 rounded-md px-4 text-sm font-medium"
       >
         {lifecycleState}
       </Badge>
@@ -209,22 +209,22 @@ function LifecycleState({ state = "idle" }) {
     <ul className="font-medium">
       What React is doing
       <li
-        className={`font-normal rounded-md p-2 ${
-          state === "idle" ? "font-semibold bg-gray-300" : ""
+        className={`rounded-md p-2 font-normal ${
+          state === "idle" ? "bg-gray-300 font-semibold" : ""
         }`}
       >
         Idle
       </li>
       <li
-        className={`font-normal rounded-md p-2 ${
-          state === "rendering" ? "font-semibold bg-orange-300" : ""
+        className={`rounded-md p-2 font-normal ${
+          state === "rendering" ? "bg-orange-300 font-semibold" : ""
         }`}
       >
         <Hover trigger="Rendering" content="Rendering the JSX to the DOM." />
       </li>
       <li
-        className={`font-normal rounded-md p-2 ${
-          state === "mounting" ? "font-semibold bg-orange-300" : ""
+        className={`rounded-md p-2 font-normal ${
+          state === "mounting" ? "bg-orange-300 font-semibold" : ""
         }`}
       >
         <Hover
@@ -233,15 +233,15 @@ function LifecycleState({ state = "idle" }) {
         />
       </li>
       <li
-        className={`font-normal rounded-md p-2 ${
-          state === "updating" ? "font-semibold bg-orange-300" : ""
+        className={`rounded-md p-2 font-normal ${
+          state === "updating" ? "bg-orange-300 font-semibold" : ""
         }`}
       >
         <Hover trigger="Updating" content="Reacting to a change of state." />
       </li>
       <li
-        className={`font-normal rounded-md p-2 ${
-          state === "unmounting" ? "font-semibold bg-orange-300" : ""
+        className={`rounded-md p-2 font-normal ${
+          state === "unmounting" ? "bg-orange-300 font-semibold" : ""
         }`}
       >
         <Hover trigger="Unmounting" content="Cleaning up🧹." />

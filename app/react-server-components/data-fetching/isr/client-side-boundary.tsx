@@ -23,7 +23,7 @@ export default function ClientSideBoundary({
   const [isRegenerated, setIsRegenerated] = useState<boolean>(false);
   const [storedTime, setStoredTime] = useLocalStorage<string>(
     "isr",
-    requestTime.toString()
+    requestTime.toString(),
   );
 
   useEffect(() => {

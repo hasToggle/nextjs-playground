@@ -16,6 +16,7 @@ export default function SSG() {
   return (
     <Card className="mt-6 p-4">
       <DataFetchingTabs>
+        {/*  */}
         <Boundary
           labels={["Server Component"]}
           color="violet"
@@ -31,7 +32,7 @@ export default function SSG() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mt-3 mb-6">
+        <div className="mb-6 mt-3 flex space-x-1">
           <Reload />
         </div>
 

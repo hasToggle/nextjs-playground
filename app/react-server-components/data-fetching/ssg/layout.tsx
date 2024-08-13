@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className="h-28">
-        <div className="px-4 py-3 my-auto border rounded-lg">
+        <div className="my-auto rounded-lg border px-4 py-3">
           <div>
             Products are fetched at build time and statically cached in a CDN
             for the lifetime of the deployment. This is most useful for content

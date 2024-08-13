@@ -54,7 +54,7 @@ export const CodeDisplay = ({
   }
 
   return (
-    <div className="bg-gray-950 rounded-md p-5">
+    <div className="rounded-md bg-gray-950 p-5">
       <div
         className="overflow-scroll whitespace-pre-wrap sm:overflow-hidden"
         dangerouslySetInnerHTML={{ __html: highlightedCode }}

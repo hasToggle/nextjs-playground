@@ -4,7 +4,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className="h-28">
-        <div className="px-4 py-3 my-auto border rounded-lg">
+        <div className="my-auto rounded-lg border px-4 py-3">
           <div>
             Products are fetched on the client using useEffect and useState.
             This is the classic client side rendering (CSR) approach. For

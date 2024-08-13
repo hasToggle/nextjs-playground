@@ -148,10 +148,10 @@ function Counter() {
             <span className="my-2 block">
               <span
                 className={clsx(
-                  "inline rounded-md px-3 py-1.5 border border-gray-300",
+                  "inline rounded-md border border-gray-300 px-3 py-1.5",
                   {
                     "bg-hastoggle-pink/60 text-white": state.disabled === false,
-                  }
+                  },
                 )}
               >
                 count: {state.internalCount}{" "}
@@ -230,13 +230,13 @@ function Counter() {
                       You clicked{" "}
                       <span
                         className={clsx(
-                          "mx-1 text-white rounded-md px-3 py-2",
+                          "mx-1 rounded-md px-3 py-2 text-white",
                           {
                             "animate-[highlight_1s_ease-in-out_1]":
                               state.disabled,
                             "bg-slate-700": state.disabled,
                             "bg-slate-800": !state.disabled,
-                          }
+                          },
                         )}
                       >
                         {state.count}

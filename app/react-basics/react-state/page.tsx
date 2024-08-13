@@ -2,7 +2,7 @@ import { Counter } from "./counter";
 
 export default function ReactState() {
   return (
-    <div className="mt-20 col-span-3">
+    <div className="col-span-3 mt-20">
       <Counter />
     </div>
   );

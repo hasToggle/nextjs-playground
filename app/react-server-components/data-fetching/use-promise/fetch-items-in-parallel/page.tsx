@@ -15,7 +15,7 @@ import { ProductsTable } from "../../table";
 import { SourceInfo } from "../../source-info";
 import { Reload } from "../../reload-button";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"; /*  */
 
 export default function UsePromiseInParallel() {
   const requestTime = new Date();
@@ -37,7 +37,7 @@ export default function UsePromiseInParallel() {
           />
         </Boundary>
 
-        <div className="flex space-x-1 mt-3 mb-6">
+        <div className="mb-6 mt-3 flex space-x-1">
           <Reload />
           <FetchItemsInParallel />
         </div>
