@@ -1,13 +1,13 @@
 # Next.js Playground
 
-This project is a demo of React basics and other mechanisms enabled by React and implemented by Next. For beginners it displays basics such as
+This project is a demo of React basics and other mechanisms enabled by React and implemented by Next. Beginners can explore basics such as
 
 - JSX
 - Props
 - React State
 - Component Lifecycle
 
-and for more advanced developers it displays various data-fetching strategies available in the App Router of Next.js
+while more advanced developers can dive into advanced data-fetching strategies 🚀 available in the App Router of Next.js
 
 - Static Site Generation (SSG),
 - Server-Side Rendering (SSR),
@@ -46,4 +46,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## For beginners
 
-To learn modern web development, visit [hasToggle.dev](#) and sign up for the waiting list. hasToggle is an upcoming video-based platform for learning all about web development.
+To learn modern web development, visit [hasToggle.dev](https://hasToggle.dev) and sign up for the waiting list. hasToggle is an upcoming video-based curriculum for learning web development.
