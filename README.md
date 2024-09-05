@@ -1,13 +1,13 @@
 # Next.js Playground
 
-This project is a demo of React basics and other mechanisms enabled by React and implemented by Next. Beginners can explore basics such as
+This project is a demo of React basics and other mechanisms enabled by React (like SSR) and implemented by Next (like Server Components). Beginners can explore basics such as
 
 - JSX
 - Props
 - React State
 - Component Lifecycle
 
-while more advanced developers can dive into advanced data-fetching strategies 🚀 available in the App Router of Next.js
+while more advanced developers can dive into data-fetching strategies 🚀 available in the App Router of Next.js
 
 - Static Site Generation (SSG),
 - Server-Side Rendering (SSR),
@@ -17,7 +17,7 @@ while more advanced developers can dive into advanced data-fetching strategies �
 
 ## The purpose
 
-The Next.js Playground is designed to showcase the powerful capabilities of Next.js and provide educational resources to learn about them.
+The Next.js Playground is designed to showcase the powerful new capabilities of React 19 and Next.js.
 
 ## Running locally
 
