@@ -14,7 +14,7 @@ export function Footer() {
           </a>
           . The source code is available on{" "}
           <a
-            href="https://github.com/hasToggle"
+            href="https://github.com/hasToggle/nextjs-playground"
             target="_blank"
             rel="noreferrer"
             className="font-medium underline underline-offset-4"
